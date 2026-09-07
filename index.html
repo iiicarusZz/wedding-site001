@@ -22,14 +22,15 @@
   /* ==========================================================
      1) CSS VARIABLES — จุดเดียวที่คุมธีมทั้งเว็บ
      เปลี่ยนสีที่นี่ที่เดียว ทั้งเว็บจะเปลี่ยนตาม
+      1#e5c2c6 2#f0dada 3#c6d1b7 4#98a78e 5#ead8c6
   ========================================================== */
   :root {
-    --bg: #f3ede1;           /* พื้นหลังหลัก เขียวเข้มแบบสวนยามค่ำ */
-    --panel: #cb7885;        /* พื้นหลังการ์ด/กล่อง */
-    --gold: #c9a063;         /* สีทอง สำหรับเน้น */
-    --blush: #e8c9bd;        /* สีชมพูอ่อน สำหรับรอง */
-    --cream: #f3ede1;        /* สีตัวอักษรหลักบนพื้นเข้ม */
-    --muted: #b9c2ba;        /* ตัวอักษรรอง */
+    --bg: #ff0905;           /* พื้นหลังหลัก เขียวเข้มแบบสวนยามค่ำ */
+    --panel: #f0f400;        /* พื้นหลังการ์ด/กล่อง */
+    --gold: #04fd21;         /* สีทอง สำหรับเน้น */
+    --blush: #04efef;        /* สีชมพูอ่อน สำหรับรอง */
+    --cream: #cb14f4;        /* สีตัวอักษรหลักบนพื้นเข้ม */
+    --muted: #390fde;        /* ตัวอักษรรอง */
     --font-display: 'Cormorant Garamond', 'Noto Serif Thai', serif;
     --font-body: 'Sarabun', sans-serif;
     --space-1: 0.5rem;
@@ -43,7 +44,7 @@
   body {
     margin: 0;
     background: var(--bg);
-    color: var(--cream);
+    color: var(--muted); /*แตะเพื่อดูการ์ด*/
     font-family: var(--font-body);
     line-height: 1.7;
   }
@@ -81,10 +82,10 @@
     /* ===== ใส่รูปพื้นหลัง 45665654.jpg เรียบร้อยแล้ว ===== */
     background:
       linear-gradient(rgba(10,20,15,0.35), rgba(10,20,15,0.55)),
-      url('PPAASS.jpg') center/cover no-repeat,
+      url('789.jpg') center/cover no-repeat,
       radial-gradient(circle at center, #2d3b2f, #12180f); /* สีสำรองถ้ายังไม่ใส่รูป */
 
-    color: var(--cream);
+    color: #e9e6e0; /* สีบิสมิลลัห 000000000000000000000000000000000*/
     transition: opacity 0.9s ease, visibility 0.9s ease;
   }
 
@@ -103,7 +104,7 @@
     font-size: 0.8rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
-    color: var(--blush);
+    color: #f4efe7; /* สี The beginning of 000000000000000000000000000000*/
     margin-top: var(--space-2);
   }
 
@@ -111,14 +112,14 @@
     font-family: 'Alex Brush', cursive;
     font-size: clamp(2.8rem, 9vw, 4.5rem);
     line-height: 1.15;
-    color: #fff;
+    color: #e9e6e0; /*ชื่อหน้าแรก zainun and sadanan0000000000000000000000000*/  
     margin-top: var(--space-2);
   }
 
   #envelopeIntro .open-hint {
     font-size: 0.9rem;
     letter-spacing: 0.05em;
-    color: var(--muted);
+    color: #e9e6e0; /*แตะเพื่อเปิดการ์ด 000000000000000000000000000000000000000*/
   }
 
   /* ===== กล่องซอง ===== */
@@ -133,9 +134,9 @@
   .envelope-body {
     position: absolute;
     inset: 0;
-    background: var(--cream);
+    background: #f4efe7 ; /*สีซองด้านหน้าสี่เหลี่ยม00000000000000000000*/
     border-radius: 6px;
-    box-shadow: 0 12px 30px rgba(243, 241, 163, 0.858); /*แสงอ่อนๆหลังซองการ์ด*/
+    box-shadow: 0 12px 30px rgba(243, 211, 152, 0.858); /*แสงอ่อนๆหลังซองการ์ด0000000000000*/
   }
 
   /* ฝาซองสามเหลี่ยม ทำด้วยเทคนิค border-trick */
@@ -145,7 +146,7 @@
     height: 0;
     border-left: calc(min(260px, 70vw) / 2) solid transparent;
     border-right: calc(min(260px, 70vw) / 2) solid transparent;
-    border-top: calc(min(260px, 70vw) * 0.38) solid #e9dfc9; /* สีฝาซอง เข้มกว่าตัวซองนิดหน่อย */
+    border-top: calc(min(260px, 70vw) * 0.38) solid #d7cdb9; /* สีฝาซอง #f4efe7     */
     transform-origin: top center;
     transition: transform 0.7s ease;
     z-index: 2;
@@ -163,14 +164,14 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: var(--cream);
-    border: 1px solid var(--gold);
+    background: #f4efe7; /*สีพื้นหลังวงกลมหน้าการ์ด 00000000000000000000000000000000000*/
+    border: 1px solid#6f644a; /*สีเส้นวงกลมหน้าการ์ด 00000000000000000000000000000000*/
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-display);
     font-style: italic;
-    color: var(--gold);
+    color: #6f644a;/*สีตัวย่อชื่อหน้าการ์ด00000000000000000000000000000000000*/
     font-size: 1.1rem;
     z-index: 3;
   }
