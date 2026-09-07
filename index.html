@@ -78,11 +78,10 @@
     text-align: center;
     padding: 3rem 1.5rem;
 
-    /* ===== แก้ตรงนี้: ใส่รูปพื้นหลังจริงของคุณ ===== */
-    /* เปลี่ยน url('') ด้านล่างเป็น url('รูปของคุณ.jpg') */
+    /* ===== ใส่รูปพื้นหลัง 45665654.jpg เรียบร้อยแล้ว ===== */
     background:
       linear-gradient(rgba(10,20,15,0.35), rgba(10,20,15,0.55)),
-      url('PPAASS.jpg') center/cover no-repeat,
+      url('45665654.jpg') center/cover no-repeat,
       radial-gradient(circle at center, #2d3b2f, #12180f); /* สีสำรองถ้ายังไม่ใส่รูป */
 
     color: var(--cream);
@@ -136,7 +135,7 @@
     inset: 0;
     background: var(--cream);
     border-radius: 6px;
-    box-shadow: 0 12px 30px rgba(250, 162, 216, 0.858);
+    box-shadow: 0 12px 30px rgba(243, 241, 163, 0.858); /*แสงอ่อนๆหลังซองการ์ด*/
   }
 
   /* ฝาซองสามเหลี่ยม ทำด้วยเทคนิค border-trick */
@@ -425,7 +424,7 @@
 <!-- ========== HERO ========== -->
 <section class="hero">
   <p class="eyebrow">We are getting married</p>
-  <h1 class="names">Zainun<br>&amp; Sadanan</span></h1>
+  <h1 class="names">Zainun<br>&amp; Sadanan</h1>
   <div class="date-block">
     <div class="date-num" id="dayNum">30</div>
     <div class="date-text">ตุลาคม<br>2026</div>
@@ -478,11 +477,6 @@
   <div class="divider"></div>
   <p style="color:var(--muted);">กรุณายืนยันการเข้าร่วมงานภายในวันที่ 10 ตุลาคม 2569</p>
 
-  <!--
-    ตัวอย่างนี้ยังไม่มี backend จริง เลยใช้ mailto ส่งเป็นอีเมลไปก่อน
-    ทางเลือกที่ทำได้จริงและง่ายกว่า: เปลี่ยนไปใช้ Google Form
-    หรือบริการฟรีอย่าง Formspree (https://formspree.io) แทน action นี้
-  -->
   <form action="mailto:youremail@example.com" method="post" enctype="text/plain">
     <input type="text" name="ชื่อ" placeholder="ชื่อ-นามสกุล" required>
     <select name="จำนวนคน" required>
@@ -520,14 +514,13 @@
 
   /* ==========================================================
      A) SCROLL REVEAL — IntersectionObserver
-     ตรวจว่า element เข้ามาในจอหรือยัง ถ้าใช่ ให้เติม class "visible"
   ========================================================== */
   const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target); // เล่นครั้งเดียวพอ ไม่ต้องเช็คซ้ำ
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15 });
@@ -537,8 +530,6 @@
 
   /* ==========================================================
      B) COUNTDOWN TIMER
-     แก้ตัวแปร weddingDate ให้เป็นวันที่งานจริงของคุณ
-     รูปแบบ: 'YYYY-MM-DDTHH:mm:ss'
   ========================================================== */
   const weddingDate = new Date('2026-10-30T10:00:00').getTime();
 
@@ -568,9 +559,7 @@
 
 
   /* ==========================================================
-     C) MARQUEE — duplicate เนื้อหาเพื่อให้วนลูปไม่มีรอยต่อ
-     เทคนิค: เอาเนื้อหาชุดแรกมา clone ต่อท้ายอีกชุด
-     CSS จะเลื่อน -50% แล้ววนกลับมาเนียนพอดี
+     C) MARQUEE
   ========================================================== */
   const track = document.getElementById('marqueeTrack');
   track.innerHTML += track.innerHTML;
@@ -578,8 +567,6 @@
 
   /* ==========================================================
      D) ปุ่มเล่น/หยุดเพลงพื้นหลัง
-     หมายเหตุ: เบราว์เซอร์บล็อกการเล่นเสียงอัตโนมัติ
-     ต้องรอให้ผู้ใช้กดปุ่มก่อนถึงจะ play() ได้
   ========================================================== */
   const soundBtn = document.getElementById('soundBtn');
   const bgm = document.getElementById('bgm');
