@@ -136,13 +136,15 @@
     inset: 0;
     background: #f4efe7 ; /*สีซองด้านหน้าสี่เหลี่ยม00000000000000000000*/
     border-radius: 6px;
-    box-shadow: 0 12px 30px rgba(243, 211, 152, 0.858); /*แสงอ่อนๆหลังซองการ์ด0000000000000*/
+    box-shadow: 0 12px 30px rgba(55, 41, 17, 0.858); /*แสงอ่อนๆหลังซองการ์ด0000000000000*/
+
+    border: 1px solid #513f15; /* ขอบซองสี่เหลี่ยม00000000000000000000000 */
   }
 
   /* ฝาซองสามเหลี่ยม ทำด้วยเทคนิค border-trick */
   .envelope-flap {
     position: absolute;
-    top: 0; left: 0; right: 0;
+    top: 0.5px; left: 0; right: 0;
     height: 0;
     border-left: calc(min(260px, 70vw) / 2) solid transparent;
     border-right: calc(min(260px, 70vw) / 2) solid transparent;
@@ -161,7 +163,7 @@
     top: 28%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 44px;
+    width: 50px;
     height: 44px;
     border-radius: 50%;
     background: #f4efe7; /*สีพื้นหลังวงกลมหน้าการ์ด 00000000000000000000000000000000000*/
