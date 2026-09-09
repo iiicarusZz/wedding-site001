@@ -320,52 +320,47 @@
   /* ==========================================================
      6) เขียนคำอวยพร (GUESTBOOK) & MARQUEE
   ========================================================== */
-/* คอนเทนเนอร์รวม 3 บรรทัด */
-.marquee-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  padding: 1.2rem 0;
-  background: var(--panel);
-  border-radius: 16px;
-  overflow: hidden;
-}
+  .marquee-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.2rem 0;
+    background: var(--panel);
+    border-radius: 16px;
+    overflow: hidden;
+  }
 
-.marquee-wrap {
-  overflow: hidden;
-  width: 100%;
-}
+  .marquee-wrap {
+    overflow: hidden;
+    width: 100%;
+  }
 
-/* ตั้งค่าให้ไหลไปทางขวา */
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: scroll-right 25s linear infinite;
-}
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-right 25s linear infinite;
+  }
 
-/* กำหนดความเร็วต่างกันเล็กน้อยเพื่อให้สุ่มความเหลื่อมล้ำดูธรรมชาติ */
-.track-1 { animation-duration: 22s; }
-.track-2 { animation-duration: 28s; }
-.track-3 { animation-duration: 24s; }
+  .track-1 { animation-duration: 22s; }
+  .track-2 { animation-duration: 28s; }
+  .track-3 { animation-duration: 24s; }
 
-.marquee-track:hover { animation-play-state: paused; }
+  .marquee-track:hover { animation-play-state: paused; }
 
-/* อนิเมชันวิ่งไปทางขวา */
-@keyframes scroll-right {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0%); }
-}
+  @keyframes scroll-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0%); }
+  }
 
-/* ตัวอักษรอย่างเดียว ไม่มีกรอบ background */
-.wish {
-  background: none;
-  border: none;
-  padding: 0 1.2rem;
-  white-space: nowrap;
-  font-size: 0.95rem;
-  color: var(--cream);
-  font-weight: 500;
-}
+  .wish {
+    background: none;
+    border: none;
+    padding: 0 1.2rem;
+    white-space: nowrap;
+    font-size: 0.95rem;
+    color: var(--cream);
+    font-weight: 500;
+  }
 
   /* ==========================================================
      7) รายละเอียดงาน & การติดต่อ
@@ -428,7 +423,7 @@
   ========================================================== */
   form { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-2); }
 
-  input, select {
+  input, select, textarea {
     background: var(--bg);
     border: 1px solid rgba(201,160,99,0.3);
     color: var(--cream);
@@ -579,7 +574,7 @@
   </div>
 </section>
 
-<!-- ========== ดุอาและฮาดิษอวยพร (ต่อจาก countdown) ========== -->
+<!-- ========== ดุอาและฮาดิษอวยพร ========== -->
 <section class="reveal" id="dua-section">
   <h2 style="font-size:1.8rem;">ดุอาและฮาดิษอวยพร</h2>
   <p style="font-size:0.9rem; color:var(--muted); margin-top:0.3rem;">คำอวยพรจากอัลกุรอานและสุนนะฮ์</p>
@@ -627,8 +622,8 @@
     <h3 style="font-size:1.2rem; color:var(--cream); font-family:var(--font-display); margin-bottom:1rem;">คำอวยพรจากคนที่รัก</h3>
     <div class="marquee-container">
       <div class="marquee-wrap"><div class="marquee-track track-1"></div></div>
-     <div class="marquee-wrap"><div class="marquee-track track-2"></div></div>
-     <div class="marquee-wrap"><div class="marquee-track track-3"></div></div>
+      <div class="marquee-wrap"><div class="marquee-track track-2"></div></div>
+      <div class="marquee-wrap"><div class="marquee-track track-3"></div></div>
     </div>
   </div>
 </section>
@@ -698,7 +693,7 @@
   Zainun<br>&amp; Sadanan · 30.10.2026
 </footer>
 
-<!-- ========== BOTTOM NAVIGATION BAR (แถบเมนูด้านล่าง 4 เมนู) ========== -->
+<!-- ========== BOTTOM NAVIGATION BAR ========== -->
 <nav class="bottom-nav">
   <a href="#dua-section">
     <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13.5L4.27 12 12 7.78 19.73 12 12 16.5z"/></svg>
@@ -846,7 +841,7 @@
         await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify({ name: name, message: msg })
         });
       } catch (err) {
