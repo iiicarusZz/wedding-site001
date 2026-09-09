@@ -276,7 +276,99 @@
   }
 
   /* ==========================================================
-     5) รายละเอียดงาน & การติดต่อ
+     5) ดุอาและฮาดิษอวยพร
+  ========================================================== */
+  .dua-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 1.25rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border: 1px solid rgba(215, 205, 185, 0.6);
+  }
+
+  .dua-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: var(--panel);
+    color: var(--cream);
+    font-size: 0.8rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .arabic-text {
+    font-family: 'Amiri', serif;
+    font-size: 1.45rem;
+    line-height: 2;
+    color: #333333;
+    margin: 0.5rem 0 1rem 0;
+    direction: rtl;
+  }
+
+  .thai-translation {
+    font-size: 0.92rem;
+    color: #555555;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ==========================================================
+     6) เขียนคำอวยพร (GUESTBOOK) & MARQUEE
+  ========================================================== */
+/* คอนเทนเนอร์รวม 3 บรรทัด */
+.marquee-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.2rem 0;
+  background: var(--panel);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.marquee-wrap {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* ตั้งค่าให้ไหลไปทางขวา */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-right 25s linear infinite;
+}
+
+/* กำหนดความเร็วต่างกันเล็กน้อยเพื่อให้สุ่มความเหลื่อมล้ำดูธรรมชาติ */
+.track-1 { animation-duration: 22s; }
+.track-2 { animation-duration: 28s; }
+.track-3 { animation-duration: 24s; }
+
+.marquee-track:hover { animation-play-state: paused; }
+
+/* อนิเมชันวิ่งไปทางขวา */
+@keyframes scroll-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+/* ตัวอักษรอย่างเดียว ไม่มีกรอบ background */
+.wish {
+  background: none;
+  border: none;
+  padding: 0 1.2rem;
+  white-space: nowrap;
+  font-size: 0.95rem;
+  color: var(--cream);
+  font-weight: 500;
+}
+
+  /* ==========================================================
+     7) รายละเอียดงาน & การติดต่อ
   ========================================================== */
   .info-card {
     background: var(--panel);
@@ -332,40 +424,7 @@
   .contact-card a:hover { text-decoration: underline; }
 
   /* ==========================================================
-     6) MARQUEE
-  ========================================================== */
-  .marquee-wrap {
-    overflow: hidden;
-    padding: var(--space-3) 0;
-    background: var(--panel);
-  }
-
-  .marquee-track {
-    display: flex;
-    width: max-content;
-    gap: var(--space-2);
-    animation: scroll-left 30s linear infinite;
-  }
-
-  .marquee-track:hover { animation-play-state: paused; }
-
-  @keyframes scroll-left {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  .wish {
-    background: var(--bg);
-    border: 1px solid rgba(201,160,99,0.2);
-    border-radius: 999px;
-    padding: 0.6rem 1.4rem;
-    white-space: nowrap;
-    font-size: 0.9rem;
-    color: var(--blush);
-  }
-
-  /* ==========================================================
-     7) ฟอร์ม RSVP
+     8) ฟอร์ม RSVP
   ========================================================== */
   form { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-2); }
 
@@ -394,7 +453,7 @@
   button:hover { filter: brightness(1.1); }
 
   /* ==========================================================
-     8) ปุ่มเล่นเพลง
+     9) ปุ่มเล่นเพลง
   ========================================================== */
   .sound-btn {
     position: fixed;
@@ -415,39 +474,42 @@
   }
 
   /* ==========================================================
-     9) BOTTOM NAVIGATION BAR (เมนูด้านล่าง)
+     10) BOTTOM NAVIGATION BAR (แถบเมนูด้านล่าง 4 เมนู)
   ========================================================== */
   .bottom-nav {
     position: fixed;
-    bottom: 1.25rem;
+    bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
-    width: calc(100% - 2.5rem);
-    max-width: 420px;
-    background: rgba(215, 205, 185, 0.92);
+    width: calc(100% - 1.5rem);
+    max-width: 500px;
+    background: rgba(215, 205, 185, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(114, 144, 163, 0.3);
     border-radius: 999px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
-    padding: 0.4rem 0.6rem;
+    padding: 0.3rem 0.4rem;
     z-index: 80;
     box-shadow: 0 10px 25px rgba(55, 41, 17, 0.15);
   }
 
   .bottom-nav a {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.15rem;
     color: var(--cream);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 999px;
+    padding: 0.4rem 0.5rem;
+    border-radius: 12px;
     transition: background 0.25s ease, color 0.25s ease;
+    flex: 1;
+    text-align: center;
   }
 
   .bottom-nav a:hover, .bottom-nav a:active {
@@ -484,7 +546,7 @@
   <div>
     <p class="open-hint" style="margin-bottom: 1rem;">แตะหน้าจอเพื่อดูการ์ด</p>
     <div class="envelope" id="envelope">
-      <div class="envelope-monogram">Z&amp;F</div>
+      <div class="envelope-monogram">Z&amp;S</div>
       <div class="envelope-body"></div>
       <div class="envelope-flap"></div>
     </div>
@@ -517,6 +579,60 @@
   </div>
 </section>
 
+<!-- ========== ดุอาและฮาดิษอวยพร (ต่อจาก countdown) ========== -->
+<section class="reveal" id="dua-section">
+  <h2 style="font-size:1.8rem;">ดุอาและฮาดิษอวยพร</h2>
+  <p style="font-size:0.9rem; color:var(--muted); margin-top:0.3rem;">คำอวยพรจากอัลกุรอานและสุนนะฮ์</p>
+  <div class="divider"></div>
+
+  <!-- Card 1 -->
+  <div class="dua-card">
+    <div class="dua-tag">📖 ดุอา</div>
+    <div class="arabic-text">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
+    <p class="thai-translation">ขออัลลอฮ์ทรงประทานความจำเริญแก่ท่านทั้งสอง และทรงเมตตาแก่ท่านทั้งสอง และทรงรวมท่านทั้งสองไว้ในความดีงาม</p>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="dua-card">
+    <div class="dua-tag">📖 ดุอา</div>
+    <div class="arabic-text">اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا وَخَيْرَ مَا جَبَلْتَهَا عَلَيْهِ، وَأَعُوذُ بِكَ مِنْ شَرِّهَا وَشَرِّ مَا جَبَلْتَهَا عَلَيْهِ</div>
+    <p class="thai-translation">ข้าแต่อัลลอฮ์ แท้จริงฉันขอต่อพระองค์ซึ่งความดีของเธอ และความดีที่พระองค์ทรงกำหนดไว้ในตัวเธอ และฉันขอความคุ้มครองต่อพระองค์ จากความชั่วของเธอ และความชั่วที่พระองค์ทรงกำหนดไว้ในตัวเธอ</p>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="dua-card">
+    <div class="dua-tag">📖 ฮาดิษ</div>
+    <div class="arabic-text">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</div>
+    <p class="thai-translation">และในบรรดาสัญญาณของพระองค์คือ พระองค์ทรงสร้างคู่ครองจากพวกท่านเอง เพื่อท่านจะได้สงบสุขไปยังคู่ของท่าน และทรงกำหนดระหว่างท่านทั้งสองซึ่งความรักและความเมตตา</p>
+  </div>
+</section>
+
+<!-- ========== เขียนคำอวยพร ========== -->
+<section class="reveal" id="wish-section">
+  <h2 style="font-size:1.8rem;">เขียนคำอวยพร</h2>
+  <p style="font-size:0.9rem; color:var(--muted); margin-top:0.3rem;">ร่วมส่งความปรารถนาดีให้แก่คู่บ่าวสาว</p>
+  <div class="divider"></div>
+
+  <!-- ฟอร์มสำหรับส่งคำอวยพร -->
+  <div class="wish-form-card">
+    <form id="wishForm">
+      <input type="text" id="wishName" placeholder="ชื่อของคุณ" required>
+      <textarea id="wishMessage" placeholder="เขียนคำอวยพรของคุณที่นี่..." required></textarea>
+      <button type="submit">ส่งคำอวยพร 🤍</button>
+    </form>
+  </div>
+
+  <!-- Marquee แสดงคำอวยพรวิ่ง -->
+  <div style="margin-top: 2rem;">
+    <h3 style="font-size:1.2rem; color:var(--cream); font-family:var(--font-display); margin-bottom:1rem;">คำอวยพรจากคนที่รัก</h3>
+    <div class="marquee-container">
+      <div class="marquee-wrap"><div class="marquee-track track-1"></div></div>
+     <div class="marquee-wrap"><div class="marquee-track track-2"></div></div>
+     <div class="marquee-wrap"><div class="marquee-track track-3"></div></div>
+    </div>
+  </div>
+</section>
+
 <!-- ========== รายละเอียดงาน & สถานที่ ========== -->
 <section class="reveal" id="venue-section">
   <h2 style="font-size:1.8rem;">รายละเอียดงาน</h2>
@@ -528,7 +644,6 @@
     <p><strong>การแต่งกาย:</strong> ชุดสุภาพโทนสีทอง/เขียวเข้ม</p>
     
     <div style="margin-top: 1.25rem;">
-      <!-- สามารถเปลี่ยน URL Google Maps เป็นพิกัดจริงได้ที่ href -->
       <a href="https://maps.google.com/?q=บ้านปากจด+สงขลา" target="_blank" rel="noopener" class="map-btn">
         📍 ดูสถานที่ใน Google Maps
       </a>
@@ -543,30 +658,19 @@
   <div class="contact-grid">
     <div class="contact-card">
       <strong>แม่เจ้าบ่าว</strong>
-      <p>โทร: <a href="tel:0800000000">0836539718</a></p>
+      <p>โทร: <a href="tel:0836539718">083-6539718</a></p>
     </div>
     <div class="contact-card">
       <strong>เจ้าบ่าว</strong>
-      <p>โทร: <a href="tel:0800000000">0928493327</a></p>
+      <p>โทร: <a href="tel:0928493327">092-8493327</a></p>
+    </div>
+    <div class="contact-card">
+      <strong>แม่เจ้าสาว</strong>
+      <p>โทร: <a href="tel:0898739628">089-8739628</a></p>
     </div>
     <div class="contact-card">
       <strong>เจ้าสาว</strong>
-      <p>โทร: <a href="tel:0890000000">0617527143</a></p>
-    </div>
-  </div>
-</section>
-
-<!-- ========== คำอวยพร (marquee) ========== -->
-<section class="reveal" style="max-width:none; padding-left:0; padding-right:0;">
-  <h2 style="font-size:1.8rem;">คำอวยพรจากคนที่รัก</h2>
-  <div class="divider"></div>
-  <div class="marquee-wrap">
-    <div class="marquee-track" id="marqueeTrack">
-      <div class="wish">ขอให้มีความสุขมากๆ นะคะ 💛</div>
-      <div class="wish">รักกันนานๆ ยาวๆ ตลอดไป</div>
-      <div class="wish">ยินดีด้วยจริงๆ นะ!</div>
-      <div class="wish">ขอให้ชีวิตคู่มีแต่รอยยิ้ม</div>
-      <div class="wish">Congratulations to the happy couple!</div>
+      <p>โทร: <a href="tel:0617527143">061-7527143</a></p>
     </div>
   </div>
 </section>
@@ -594,15 +698,23 @@
   Zainun<br>&amp; Sadanan · 30.10.2026
 </footer>
 
-<!-- ========== BOTTOM NAVIGATION BAR (แถบเมนูด้านล่าง) ========== -->
+<!-- ========== BOTTOM NAVIGATION BAR (แถบเมนูด้านล่าง 4 เมนู) ========== -->
 <nav class="bottom-nav">
+  <a href="#dua-section">
+    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13.5L4.27 12 12 7.78 19.73 12 12 16.5z"/></svg>
+    <span>ดุอา/ฮาดิษ</span>
+  </a>
+  <a href="#wish-section">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+    <span>เขียนคำอวยพร</span>
+  </a>
   <a href="#venue-section">
     <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-    <span>สถานที่จัดงาน</span>
+    <span>สถานที่</span>
   </a>
   <a href="#contact-section">
     <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-    <span>ช่องทางการติดต่อ</span>
+    <span>ติดต่อ</span>
   </a>
 </nav>
 
@@ -667,10 +779,86 @@
   const timer = setInterval(updateCountdown, 1000);
 
   /* ==========================================================
-     C) MARQUEE
+     C) MARQUEE 3 ROWS WITH GOOGLE SHEETS INTEGRATION
   ========================================================== */
-  const track = document.getElementById('marqueeTrack');
-  track.innerHTML += track.innerHTML;
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTlqRewP52vFEwgBThJOnQaro8UYK2yNmdJI7OinN9RCSd55o1QKrQQ76Q5zWY6Yg/exec";
+
+  const tracks = document.querySelectorAll('.marquee-track');
+
+  // ฟังก์ชันสำหรับใส่ข้อความคำอวยพรลงในแถบวิ่ง (สุ่มบรรทัด 1-3)
+  function addWishToRandomTrack(name, msg) {
+    const wishEl = document.createElement('div');
+    wishEl.className = 'wish';
+    wishEl.textContent = `${msg} — ${name}`;
+
+    const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
+    randomTrack.appendChild(wishEl);
+  }
+
+  // ดึงข้อมูลคำอวยพรทั้งหมดจาก Google Sheets มาแสดง
+  async function loadWishesFromSheets() {
+    tracks.forEach(track => track.innerHTML = '');
+
+    if (!GOOGLE_SCRIPT_URL) return;
+
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL);
+      const wishes = await response.json();
+
+      if (wishes && wishes.length > 0) {
+        wishes.forEach(item => {
+          addWishToRandomTrack(item.name, item.message);
+        });
+
+        // คัดลอกข้อความเพื่อให้ตัวหนังสือวิ่งยาววนลูปได้อย่างต่อเนื่อง
+        tracks.forEach(track => {
+          track.innerHTML += track.innerHTML;
+        });
+      }
+    } catch (err) {
+      console.error("เกิดข้อผิดพลาดในการโหลดคำอวยพร:", err);
+    }
+  }
+
+  loadWishesFromSheets();
+
+  // ระบบส่งคำอวยพรบันทึกลง Google Sheets
+  const wishForm = document.getElementById('wishForm');
+  const submitBtn = wishForm.querySelector('button[type="submit"]');
+
+  wishForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('wishName').value.trim();
+    const msg = document.getElementById('wishMessage').value.trim();
+
+    if (!name || !msg) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'กำลังส่งคำอวยพร...';
+
+    // แสดงผลบนหน้าจอทันที
+    addWishToRandomTrack(name, msg);
+
+    // ส่งข้อมูลลง Google Sheets
+    if (GOOGLE_SCRIPT_URL) {
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name, message: msg })
+        });
+      } catch (err) {
+        console.error("ไม่สามารถบันทึกข้อมูลลง Google Sheets ได้:", err);
+      }
+    }
+
+    alert('ขอบคุณสำหรับคำอวยพรครับ! 🤍');
+    wishForm.reset();
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'ส่งคำอวยพร 🤍';
+  });
 
   /* ==========================================================
      D) ปุ่มเล่น/หยุดเพลง
