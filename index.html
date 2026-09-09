@@ -419,11 +419,11 @@
   .contact-card a:hover { text-decoration: underline; }
 
   /* ==========================================================
-     8) ฟอร์ม RSVP
+     8) ฟอร์มคำอวยพร
   ========================================================== */
   form { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-2); }
 
-  input, select, textarea {
+  input, textarea {
     background: var(--bg);
     border: 1px solid rgba(201,160,99,0.3);
     color: var(--cream);
@@ -668,25 +668,6 @@
       <p>โทร: <a href="tel:0617527143">061-7527143</a></p>
     </div>
   </div>
-</section>
-
-<!-- ========== RSVP FORM ========== -->
-<section class="reveal">
-  <h2 style="font-size:1.8rem;">ตอบรับคำเชิญ</h2>
-  <div class="divider"></div>
-  <p style="color:var(--muted);">กรุณายืนยันการเข้าร่วมงานภายในวันที่ 10 ตุลาคม 2569</p>
-
-  <form action="mailto:youremail@example.com" method="post" enctype="text/plain">
-    <input type="text" name="ชื่อ" placeholder="ชื่อ-นามสกุล" required>
-    <select name="จำนวนคน" required>
-      <option value="">จำนวนผู้เข้าร่วม</option>
-      <option value="1">1 คน</option>
-      <option value="2">2 คน</option>
-      <option value="3">3 คน</option>
-      <option value="4+">4 คนขึ้นไป</option>
-    </select>
-    <button type="submit">ส่งคำตอบรับ</button>
-  </form>
 </section>
 
 <footer>
