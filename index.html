@@ -3,34 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>คำเชิญงานแต่งงาน — ตัวอย่าง</title>
+<title>คำเชิญงานแต่งงาน — Zainun & Sadanan</title>
 
-<!--
-  ฟอนต์: ใช้ Google Fonts สองตระกูล
-  - Cormorant Garamond / Noto Serif Thai สำหรับหัวข้อ (ให้ความรู้สึกหรูหรา)
-  - Sarabun สำหรับเนื้อหาอ่านง่าย
--->
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+Thai:wght@400;500;600&family=Sarabun:wght@300;400;500&family=Amiri:wght@400;700&family=Alex+Brush&display=swap" rel="stylesheet">
-<!--
-  เพิ่ม 2 ฟอนต์สำหรับหน้าปกซอง:
-  - Amiri: ฟอนต์อารบิกสำหรับข้อความ บิสมิลลาฮ์
-  - Alex Brush: ฟอนต์ลายมือหวานๆ สำหรับชื่อคู่บ่าวสาว
--->
 
 <style>
   /* ==========================================================
-     1) CSS VARIABLES — จุดเดียวที่คุมธีมทั้งเว็บ
-     เปลี่ยนสีที่นี่ที่เดียว ทั้งเว็บจะเปลี่ยนตาม
-      1#e5c2c6 2#f0dada 3#c6d1b7 4#98a78e 5#ead8c6
+     1) CSS VARIABLES
   ========================================================== */
   :root {
-    --bg: #f4efe7;           /* พื้นหลังหลัก  */
-    --panel: #d7cdb9;        /* พื้นหลังการ์ด/กล่อง */
-    --gold: #7290a3;         /* สีทอง สำหรับเน้น */
-    --blush: #7290a3;        /* We are getting married นับถอยหลัง*/
-    --cream: #6c5635;        /* สีตัวอักษรหลักบนพื้นเข้ม */
-    --muted: #7290a3;        /* ตัวอักษรรอง */
+    --bg: #f4efe7;          /* พื้นหลังหลัก  */
+    --panel: #d7cdb9;       /* พื้นหลังการ์ด/กล่อง */
+    --gold: #7290a3;        /* สีทอง สำหรับเน้น */
+    --blush: #7290a3;       /* We are getting married นับถอยหลัง*/
+    --cream: #6c5635;       /* สีตัวอักษรหลักบนพื้นเข้ม */
+    --muted: #7290a3;       /* ตัวอักษรรอง */
     --font-display: 'Cormorant Garamond', 'Noto Serif Thai', serif;
     --font-body: 'Sarabun', sans-serif;
     --space-1: 0.5rem;
@@ -39,14 +28,19 @@
     --space-4: 4rem;
   }
 
+  html {
+    scroll-behavior: smooth; /* เลื่อนหน้าจอแบบนุ่มนวลเมื่อกดเมนู */
+  }
+
   * { box-sizing: border-box; }
 
   body {
     margin: 0;
     background: var(--bg);
-    color: var(--muted); /*แตะเพื่อดูการ์ด*/
+    color: var(--muted);
     font-family: var(--font-body);
     line-height: 1.7;
+    padding-bottom: 90px; /* เว้นพื้นที่ด้านล่างไม่ให้เมนูทับเนื้อหา */
   }
 
   h1, h2 {
@@ -63,10 +57,9 @@
   }
 
   /* ==========================================================
-     0) ENVELOPE INTRO — หน้าปกซองที่คลุมทับทุกอย่างไว้ตอนแรก
-     พอกดที่ซอง จะเฟดหายไปเผยหน้าเว็บจริงด้านล่าง
+     0) ENVELOPE INTRO
   ========================================================== */
-  body.intro-active { overflow: hidden; } /* ล็อกการเลื่อนหน้าจอไว้ตอนที่ยังไม่เปิดซอง */
+  body.intro-active { overflow: hidden; }
 
   #envelopeIntro {
     position: fixed;
@@ -78,14 +71,11 @@
     justify-content: space-between;
     text-align: center;
     padding: 3rem 1.5rem;
-
-    /* ===== ใส่รูปพื้นหลัง 45665654.jpg เรียบร้อยแล้ว ===== */
     background:
       linear-gradient(rgba(10,20,15,0.35), rgba(10,20,15,0.55)),
       url('789.jpg') center/cover no-repeat,
-      radial-gradient(circle at center, #2d3b2f, #12180f); /* สีสำรองถ้ายังไม่ใส่รูป */
-
-    color: #e9e6e0; /* สีบิสมิลลัห 000000000000000000000000000000000*/
+      radial-gradient(circle at center, #2d3b2f, #12180f);
+    color: #e9e6e0;
     transition: opacity 0.9s ease, visibility 0.9s ease;
   }
 
@@ -104,7 +94,7 @@
     font-size: 1rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
-    color: #f4efe7; /* สี The beginning of 000000000000000000000000000000*/
+    color: #f4efe7;
     margin-top: var(--space-2);
   }
 
@@ -112,50 +102,47 @@
     font-family: 'Alex Brush', cursive;
     font-size: clamp(2.8rem, 9vw, 4.5rem);
     line-height: 1.15;
-    color: #e9e6e0; /*ชื่อหน้าแรก zainun and sadanan0000000000000000000000000*/  
+    color: #e9e6e0;
     margin-top: var(--space-2);
   }
 
   #envelopeIntro .open-hint {
     font-size: 0.9rem;
     letter-spacing: 0.05em;
-    color: #e9e6e0; /*แตะเพื่อเปิดการ์ด 000000000000000000000000000000000000000*/
+    color: #e9e6e0;
   }
 
-  /* ===== กล่องซอง ===== */
   .envelope {
     width: min(260px, 70vw);
     aspect-ratio: 3 / 2;
     position: relative;
     cursor: pointer;
-    perspective: 800px; /* ทำให้ฝาซองพลิกดูมีมิติตอนเปิด */
+    perspective: 800px;
   }
 
   .envelope-body {
     position: absolute;
     inset: 0;
-    background: #f4efe7 ; /*สีซองด้านหน้าสี่เหลี่ยม00000000000000000000*/
+    background: #f4efe7;
     border-radius: 6px;
-    box-shadow: 0 12px 30px rgba(55, 41, 17, 0.858); /*แสงอ่อนๆหลังซองการ์ด0000000000000*/
-
-    border: 1px solid #513f15; /* ขอบซองสี่เหลี่ยม00000000000000000000000 */
+    box-shadow: 0 12px 30px rgba(55, 41, 17, 0.858);
+    border: 1px solid #513f15;
   }
 
-  /* ฝาซองสามเหลี่ยม ทำด้วยเทคนิค border-trick */
   .envelope-flap {
     position: absolute;
     top: 0.5px; left: 0; right: 0;
     height: 0;
     border-left: calc(min(260px, 70vw) / 2) solid transparent;
     border-right: calc(min(260px, 70vw) / 2) solid transparent;
-    border-top: calc(min(260px, 70vw) * 0.38) solid #d7cdb9; /* สีฝาซอง #f4efe7     */
+    border-top: calc(min(260px, 70vw) * 0.38) solid #d7cdb9;
     transform-origin: top center;
     transition: transform 0.7s ease;
     z-index: 2;
   }
 
   .envelope.opened .envelope-flap {
-    transform: rotateX(180deg); /* พลิกฝาซองขึ้นตอนกด */
+    transform: rotateX(180deg);
   }
 
   .envelope-monogram {
@@ -166,14 +153,14 @@
     width: 50px;
     height: 44px;
     border-radius: 50%;
-    background: #f4efe7; /*สีพื้นหลังวงกลมหน้าการ์ด 00000000000000000000000000000000000*/
-    border: 1px solid#6f644a; /*สีเส้นวงกลมหน้าการ์ด 00000000000000000000000000000000*/
+    background: #f4efe7;
+    border: 1px solid #6f644a;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-display);
     font-style: italic;
-    color: #6f644a;/*สีตัวย่อชื่อหน้าการ์ด00000000000000000000000000000000000*/
+    color: #6f644a;
     font-size: 1.1rem;
     z-index: 3;
   }
@@ -184,8 +171,7 @@
   }
 
   /* ==========================================================
-     2) HERO — จุดเด่นที่สุดของหน้า
-     ใช้ตัวเลขวันที่ใหญ่แทนรูปภาพ เป็น "จุดโฟกัส" เดียวของหน้า
+     2) HERO
   ========================================================== */
   .hero {
     min-height: 100svh;
@@ -213,7 +199,7 @@
 
   .hero .names span { 
     display: block;
-    color: #ef0b0b; /* วันที่ เวลา สถานที่ การแต่งกาย 000000000000000000*/
+    color: #ef0b0b;
   }
 
   .hero .date-block {
@@ -236,7 +222,6 @@
     font-size: 0.95rem;
   }
 
-  /* เส้นคั่นเล็กๆ ใช้ซ้ำหลายจุด แทนไอคอนตกแต่งฟุ่มเฟือย */
   .divider {
     width: 48px;
     height: 1px;
@@ -247,8 +232,6 @@
 
   /* ==========================================================
      3) SCROLL REVEAL ANIMATION
-     ทุก element ที่มี class "reveal" จะเริ่มด้วย opacity:0
-     แล้วถูกเติม class "visible" ด้วย JS เมื่อเลื่อนเข้ามาในจอ
   ========================================================== */
   .reveal {
     opacity: 0;
@@ -293,7 +276,7 @@
   }
 
   /* ==========================================================
-     5) รายละเอียดงาน / Dress code
+     5) รายละเอียดงาน & การติดต่อ
   ========================================================== */
   .info-card {
     background: var(--panel);
@@ -305,9 +288,51 @@
   .info-card p { margin: var(--space-1) 0; color: var(--muted); }
   .info-card strong { color: var(--cream); }
 
+  .map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--gold);
+    color: var(--bg);
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 1rem;
+    transition: filter 0.2s ease;
+  }
+  .map-btn:hover { filter: brightness(1.1); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .contact-card {
+    background: var(--panel);
+    border-radius: 16px;
+    padding: var(--space-2) var(--space-3);
+    text-align: center;
+  }
+
+  .contact-card strong {
+    color: var(--cream);
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-card a {
+    color: var(--cream);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .contact-card a:hover { text-decoration: underline; }
+
   /* ==========================================================
-     6) MARQUEE คำอวยพร — เลื่อนแนวนอนไม่รู้จบ
-     เทคนิค: duplicate เนื้อหา 2 ชุดแล้วเลื่อน -50% วนลูป
+     6) MARQUEE
   ========================================================== */
   .marquee-wrap {
     overflow: hidden;
@@ -369,7 +394,7 @@
   button:hover { filter: brightness(1.1); }
 
   /* ==========================================================
-     8) ปุ่มเล่นเพลง — ลอยมุมจอ
+     8) ปุ่มเล่นเพลง
   ========================================================== */
   .sound-btn {
     position: fixed;
@@ -389,6 +414,53 @@
     font-size: 1.1rem;
   }
 
+  /* ==========================================================
+     9) BOTTOM NAVIGATION BAR (เมนูด้านล่าง)
+  ========================================================== */
+  .bottom-nav {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 2.5rem);
+    max-width: 420px;
+    background: rgba(215, 205, 185, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(114, 144, 163, 0.3);
+    border-radius: 999px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0.4rem 0.6rem;
+    z-index: 80;
+    box-shadow: 0 10px 25px rgba(55, 41, 17, 0.15);
+  }
+
+  .bottom-nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  .bottom-nav a:hover, .bottom-nav a:active {
+    background: var(--bg);
+    color: var(--cream);
+  }
+
+  .bottom-nav svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
   footer {
     text-align: center;
     padding: var(--space-3);
@@ -400,8 +472,7 @@
 <body class="intro-active">
 
 <!-- ==========================================================
-     หน้าปกซอง — สิ่งแรกที่แขกเห็นก่อนเข้าเว็บ
-     กดที่ซองด้านล่าง เพื่อเปิดเข้าสู่การ์ดเชิญจริง
+     หน้าปกซอง
 ========================================================== -->
 <div id="envelopeIntro">
   <div>
@@ -420,7 +491,7 @@
   </div>
 </div>
 
-<!-- ปุ่มเล่น/หยุดเพลง — เปลี่ยน src ของ audio เป็นเพลงจริงของคุณ -->
+<!-- ปุ่มเล่น/หยุดเพลง -->
 <button class="sound-btn" id="soundBtn" aria-label="เปิด/ปิดเพลง">♪</button>
 <audio id="bgm" loop src=""></audio>
 
@@ -446,8 +517,8 @@
   </div>
 </section>
 
-<!-- ========== รายละเอียดงาน ========== -->
-<section class="reveal">
+<!-- ========== รายละเอียดงาน & สถานที่ ========== -->
+<section class="reveal" id="venue-section">
   <h2 style="font-size:1.8rem;">รายละเอียดงาน</h2>
   <div class="divider"></div>
   <div class="info-card">
@@ -455,6 +526,33 @@
     <p><strong>เวลา:</strong> 10:00 - 14:00 น.</p>
     <p><strong>สถานที่:</strong> บ้านปากจด, สงขลา</p>
     <p><strong>การแต่งกาย:</strong> ชุดสุภาพโทนสีทอง/เขียวเข้ม</p>
+    
+    <div style="margin-top: 1.25rem;">
+      <!-- สามารถเปลี่ยน URL Google Maps เป็นพิกัดจริงได้ที่ href -->
+      <a href="https://maps.google.com/?q=บ้านปากจด+สงขลา" target="_blank" rel="noopener" class="map-btn">
+        📍 ดูสถานที่ใน Google Maps
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ช่องทางการติดต่อ ========== -->
+<section class="reveal" id="contact-section">
+  <h2 style="font-size:1.8rem;">ช่องทางการติดต่อ</h2>
+  <div class="divider"></div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <strong>แม่เจ้าบ่าว</strong>
+      <p>โทร: <a href="tel:0800000000">0836539718</a></p>
+    </div>
+    <div class="contact-card">
+      <strong>เจ้าบ่าว</strong>
+      <p>โทร: <a href="tel:0800000000">0928493327</a></p>
+    </div>
+    <div class="contact-card">
+      <strong>เจ้าสาว</strong>
+      <p>โทร: <a href="tel:0890000000">0617527143</a></p>
+    </div>
   </div>
 </section>
 
@@ -464,7 +562,6 @@
   <div class="divider"></div>
   <div class="marquee-wrap">
     <div class="marquee-track" id="marqueeTrack">
-      <!-- ชุดคำอวยพร (จะถูก duplicate ด้วย JS ด้านล่างเพื่อให้วนลูปไม่มีรอยต่อ) -->
       <div class="wish">ขอให้มีความสุขมากๆ นะคะ 💛</div>
       <div class="wish">รักกันนานๆ ยาวๆ ตลอดไป</div>
       <div class="wish">ยินดีด้วยจริงๆ นะ!</div>
@@ -497,26 +594,36 @@
   Zainun<br>&amp; Sadanan · 30.10.2026
 </footer>
 
+<!-- ========== BOTTOM NAVIGATION BAR (แถบเมนูด้านล่าง) ========== -->
+<nav class="bottom-nav">
+  <a href="#venue-section">
+    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+    <span>สถานที่จัดงาน</span>
+  </a>
+  <a href="#contact-section">
+    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    <span>ช่องทางการติดต่อ</span>
+  </a>
+</nav>
+
 <script>
   /* ==========================================================
-     0) ENVELOPE INTRO — กดซองแล้วเปิดเข้าสู่เว็บจริง
+     0) ENVELOPE INTRO
   ========================================================== */
   const envelope = document.getElementById('envelope');
   const introScreen = document.getElementById('envelopeIntro');
 
   envelope.addEventListener('click', () => {
-    envelope.classList.add('opened');      // เล่นแอนิเมชันฝาซองพลิกเปิด
+    envelope.classList.add('opened');
 
-    // รอให้แอนิเมชันฝาซองเล่นจบก่อน (0.7s) แล้วค่อยเฟดทั้งหน้าจอออก
     setTimeout(() => {
       introScreen.classList.add('hidden');
-      document.body.classList.remove('intro-active'); // ปลดล็อกการเลื่อนหน้าจอ
+      document.body.classList.remove('intro-active');
     }, 700);
   });
 
-
   /* ==========================================================
-     A) SCROLL REVEAL — IntersectionObserver
+     A) SCROLL REVEAL
   ========================================================== */
   const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
@@ -529,7 +636,6 @@
   }, { threshold: 0.15 });
 
   revealEls.forEach(el => observer.observe(el));
-
 
   /* ==========================================================
      B) COUNTDOWN TIMER
@@ -560,16 +666,14 @@
   updateCountdown();
   const timer = setInterval(updateCountdown, 1000);
 
-
   /* ==========================================================
      C) MARQUEE
   ========================================================== */
   const track = document.getElementById('marqueeTrack');
   track.innerHTML += track.innerHTML;
 
-
   /* ==========================================================
-     D) ปุ่มเล่น/หยุดเพลงพื้นหลัง
+     D) ปุ่มเล่น/หยุดเพลง
   ========================================================== */
   const soundBtn = document.getElementById('soundBtn');
   const bgm = document.getElementById('bgm');
