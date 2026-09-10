@@ -176,18 +176,29 @@
   .card-preview-section {
     padding-top: var(--space-4);
     padding-bottom: var(--space-2);
-
-    /* 👇 เพิ่ม 3 บรรทัดนี้เพื่อปลดล็อกระยะขอบซ้าย-ขวา
-    padding-left: 1rem;  /* เว้นขอบไว้นิดหน่อยเพื่อความสวยงาม (ถ้าอยากให้ชิดขอบจอเลยให้ใส่ 0)
-    padding-right: 1rem;
-    max-width: 100%;*/
-
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     width: 100%;
-    max-width: 980px; ขยายขนาดการ์ดให้กว้างเต็มตา
+    max-width: 950px; /* ตั้งไว้กว้างๆ เพื่อให้รูปด้านในขยายได้ตามใจ */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* ระยะห่างระหว่างรูปที่ 1 และ รูปที่ 2 */
+    gap: 1.5rem;
+  }
+
+  /* 2. กำหนดขนาดแยกเฉพาะบนหน้าจอคอมพิวเตอร์ (ตั้งแต่ 768px ขึ้นไป) */
+  @media (min-width: 768px) {
+    /* ปรับขนาดรูปที่ 1 บนคอม */
+    #cardImage1 {
+      max-width: 980px; /* ปรับความกว้างรูปที่ 1 */
+      margin: 0 auto;   /* จัดให้อยู่ตรงกลาง */
+    }
+
+    /* ปรับขนาดรูปที่ 2 บนคอม */
+    #cardImage2 {
+      max-width: 520px; /* 👈 ย่อรูปที่ 2 ให้เล็กลงตามต้องการตรงนี้ได้เลย */
+      margin: 0 auto;   /* จัดให้อยู่ตรงกลาง */
+    }
   }
 
   .card-img-wrapper {
