@@ -29,7 +29,7 @@
   }
 
   html {
-    scroll-behavior: smooth; /* เลื่อนหน้าจอแบบนุ่มนวลเมื่อกดเมนู */
+    scroll-behavior: smooth;
   }
 
   * { box-sizing: border-box; }
@@ -40,7 +40,7 @@
     color: var(--muted);
     font-family: var(--font-body);
     line-height: 1.7;
-    padding-bottom: 90px; /* เว้นพื้นที่ด้านล่างไม่ให้เมนูทับเนื้อหา */
+    padding-bottom: 90px;
   }
 
   h1, h2 {
@@ -171,122 +171,55 @@
   }
 
   /* ==========================================================
-     2) HERO (หน้า 1)
-  ========================================================== */
-  .hero {
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: var(--space-3);
-  }
-
-  .hero .eyebrow {
-    color: var(--blush);
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 1.1rem;
-    letter-spacing: 0.05em;
-  }
-
-  .hero .names {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    color: var(--cream);
-    margin: var(--space-2) 0;
-  }
-
-  .hero .names span { 
-    display: block;
-    color: #ef0b0b;
-  }
-
-  .hero .date-block {
-    margin-top: var(--space-3);
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-2);
-  }
-
-  .hero .date-num {
-    font-family: var(--font-display);
-    font-size: clamp(4rem, 15vw, 7rem);
-    color: var(--gold);
-    line-height: 0.9;
-  }
-
-  .hero .date-text {
-    text-align: left;
-    color: var(--muted);
-    font-size: 0.95rem;
-  }
-
-  .divider {
-    width: 48px;
-    height: 1px;
-    background: var(--gold);
-    margin: var(--space-3) auto;
-    opacity: 0.6;
-  }
-
-  /* ==========================================================
-     3) SCROLL REVEAL ANIMATION
-  ========================================================== */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ==========================================================
-     4) ส่วนแสดงรูปภาพการ์ดแต่งงาน (บนสุดหน้า 2)
+     4) ส่วนแสดงรูปภาพการ์ดแต่งงานแบบลอยโปร่งใส (ย้ายขึ้นบนสุด)
   ========================================================== */
   .card-preview-section {
-    padding-top: var(--space-3);
-    padding-bottom: 1rem;
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-2);
+    width: 100%;
+    max-width: 720px; /* ขยายขนาดการ์ดให้กว้างเต็มตา */
+    margin: 0 auto;
   }
 
   .card-img-wrapper {
     position: relative;
     cursor: pointer;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 12px 35px rgba(55, 41, 17, 0.18);
-    border: 1px solid rgba(215, 205, 185, 0.8);
-    transition: transform 0.35 ease, box-shadow 0.35s ease;
-    background: #fff;
+    background: transparent; /* เอาพื้นหลังขาวออก */
+    border: none;             /* เอาขอบออก */
+    box-shadow: none;         /* เอากรอบเงาสี่เหลี่ยมออก */
+    border-radius: 0;
+    overflow: visible;
+    transition: transform 0.35s ease;
   }
 
   .card-img-wrapper:hover {
     transform: translateY(-4px);
-    box-shadow: 0 18px 40px rgba(55, 41, 17, 0.25);
   }
 
   .card-img-wrapper img {
     width: 100%;
     height: auto;
     display: block;
-    image-rendering: -webkit-optimize-contrast; /* เร่งความคมชัดของภาพบนมือถือ/จอ Retina */
+    /* เงาลอยสมจริงตามลายการ์ด SVG */
+    mix-blend-mode: multiply; /* 👈 เพิ่มบรรทัดนี้เพื่อลบสีขาวออก และกลืนไปกับพื้นหลัง */
+    filter: drop-shadow(0 12px 24px rgba(55, 41, 17, 0.15));
   }
 
   .zoom-hint-badge {
     position: absolute;
-    bottom: 14px;
-    right: 14px;
+    bottom: 10px;
+    right: 50%;
+    transform: translateX(50%);
     background: rgba(18, 24, 15, 0.75);
     color: #f4efe7;
-    padding: 6px 14px;
+    padding: 6px 16px;
     border-radius: 20px;
     font-size: 0.82rem;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     pointer-events: none;
+    white-space: nowrap;
   }
 
   /* POP-UP MODAL สำหรับดูภาพใหญ่ซูมไม่แตก */
@@ -326,6 +259,79 @@
     border: none;
     line-height: 1;
     padding: 5px 12px;
+  }
+
+  /* ==========================================================
+     2) HERO
+  ========================================================== */
+  .hero {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: var(--space-3) var(--space-3);
+  }
+
+  .hero .eyebrow {
+    color: var(--blush);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hero .names {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    color: var(--cream);
+    margin: var(--space-2) 0;
+  }
+
+  .hero .names span { 
+    display: block;
+    color: #ef0b0b;
+  }
+
+  .hero .date-block {
+    margin-top: var(--space-2);
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .hero .date-num {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 15vw, 7rem);
+    color: var(--gold);
+    line-height: 0.9;
+  }
+
+  .hero .date-text {
+    text-align: left;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: var(--space-3) auto;
+    opacity: 0.6;
+  }
+
+  /* ==========================================================
+     3) SCROLL REVEAL ANIMATION
+  ========================================================== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* ==========================================================
@@ -637,7 +643,21 @@
 <button class="sound-btn" id="soundBtn" aria-label="เปิด/ปิดเพลง">♪</button>
 <audio id="bgm" loop src=""></audio>
 
-<!-- ========== HERO (หน้า 1) ========== -->
+<!-- ========== 1) ส่วนแสดงรูปภาพการ์ดแต่งงานแบบลอยโปร่งใส (ขยับขึ้นมาไว้บนสุด) ========== -->
+<section class="reveal card-preview-section" id="wedding-card-section">
+  <div class="card-img-wrapper" onclick="openCardModal()">
+    <img src="74563.svg" alt="การ์ดแต่งงาน Zainun & Sadanan" id="cardImage">
+    <div class="zoom-hint-badge">🔍 แตะเพื่อดูการ์ดฉบับเต็ม / ซูม</div>
+  </div>
+</section>
+
+<!-- Pop-up แสดงภาพขยายใหญ่ 100% -->
+<div class="image-modal" id="cardModal" onclick="closeCardModal()">
+  <button class="close-modal-btn" aria-label="ปิด">&times;</button>
+  <img src="74563.svg" alt="การ์ดแต่งงาน ภาพขยายใหญ่">
+</div>
+
+<!-- ========== 2) HERO ========== -->
 <section class="hero">
   <p class="eyebrow">We are getting married</p>
   <h1 class="names">Zainun<br>&amp; Sadanan</h1>
@@ -646,21 +666,6 @@
     <div class="date-text">ตุลาคม<br>2026</div>
   </div>
 </section>
-
-<!-- ========== หน้า 2 : บนสุด (รูปการ์ดแต่งงานแบบซูมได้ไม่แตก) ========== -->
-<section class="reveal card-preview-section" id="wedding-card-section">
-  <div class="card-img-wrapper" onclick="openCardModal()">
-    <!-- เปลี่ยนชื่อไฟล์รูปภาพให้ตรงกับไฟล์รูปจริงของคุณได้ที่นี่ -->
-    <img src="30.png" alt="การ์ดแต่งงาน Zainun & Sadanan" id="cardImage">
-    <div class="zoom-hint-badge">🔍 แตะเพื่อดูการ์ดฉบับเต็ม / ซูม</div>
-  </div>
-</section>
-
-<!-- Pop-up แสดงภาพขยายใหญ่ 100% -->
-<div class="image-modal" id="cardModal" onclick="closeCardModal()">
-  <button class="close-modal-btn" aria-label="ปิด">&times;</button>
-  <img src="30.png" alt="การ์ดแต่งงาน ภาพขยายใหญ่">
-</div>
 
 <!-- ========== COUNTDOWN ========== -->
 <section class="reveal">
