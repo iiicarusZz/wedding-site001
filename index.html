@@ -171,7 +171,7 @@
   }
 
   /* ==========================================================
-     2) HERO
+     2) HERO (หน้า 1)
   ========================================================== */
   .hero {
     min-height: 100svh;
@@ -244,7 +244,92 @@
   }
 
   /* ==========================================================
-     4) COUNTDOWN
+     4) ส่วนแสดงรูปภาพการ์ดแต่งงาน (บนสุดหน้า 2)
+  ========================================================== */
+  .card-preview-section {
+    padding-top: var(--space-3);
+    padding-bottom: 1rem;
+  }
+
+  .card-img-wrapper {
+    position: relative;
+    cursor: pointer;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(55, 41, 17, 0.18);
+    border: 1px solid rgba(215, 205, 185, 0.8);
+    transition: transform 0.35 ease, box-shadow 0.35s ease;
+    background: #fff;
+  }
+
+  .card-img-wrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(55, 41, 17, 0.25);
+  }
+
+  .card-img-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    image-rendering: -webkit-optimize-contrast; /* เร่งความคมชัดของภาพบนมือถือ/จอ Retina */
+  }
+
+  .zoom-hint-badge {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    background: rgba(18, 24, 15, 0.75);
+    color: #f4efe7;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+  }
+
+  /* POP-UP MODAL สำหรับดูภาพใหญ่ซูมไม่แตก */
+  .image-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(10, 15, 10, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .image-modal.active {
+    display: flex;
+  }
+
+  .image-modal img {
+    max-width: 96%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .close-modal-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #ffffff;
+    font-size: 2.2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+    padding: 5px 12px;
+  }
+
+  /* ==========================================================
+     5) COUNTDOWN
   ========================================================== */
   .countdown {
     display: flex;
@@ -276,7 +361,7 @@
   }
 
   /* ==========================================================
-     5) ดุอาและฮาดิษอวยพร
+     6) ดุอาและฮาดิษอวยพร
   ========================================================== */
   .dua-card {
     background: #ffffff;
@@ -318,7 +403,7 @@
   }
 
   /* ==========================================================
-     6) เขียนคำอวยพร (GUESTBOOK) & MARQUEE
+     7) เขียนคำอวยพร (GUESTBOOK) & MARQUEE
   ========================================================== */
   .marquee-container {
     display: flex;
@@ -363,7 +448,7 @@
   }
 
   /* ==========================================================
-     7) รายละเอียดงาน & การติดต่อ
+     8) รายละเอียดงาน & การติดต่อ
   ========================================================== */
   .info-card {
     background: var(--panel);
@@ -419,7 +504,7 @@
   .contact-card a:hover { text-decoration: underline; }
 
   /* ==========================================================
-     8) ฟอร์มคำอวยพร
+     9) ฟอร์มคำอวยพร
   ========================================================== */
   form { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-2); }
 
@@ -448,7 +533,7 @@
   button:hover { filter: brightness(1.1); }
 
   /* ==========================================================
-     9) ปุ่มเล่นเพลง
+     10) ปุ่มเล่นเพลง
   ========================================================== */
   .sound-btn {
     position: fixed;
@@ -469,7 +554,7 @@
   }
 
   /* ==========================================================
-     10) BOTTOM NAVIGATION BAR (แถบเมนูด้านล่าง 4 เมนู)
+     11) BOTTOM NAVIGATION BAR
   ========================================================== */
   .bottom-nav {
     position: fixed;
@@ -552,7 +637,7 @@
 <button class="sound-btn" id="soundBtn" aria-label="เปิด/ปิดเพลง">♪</button>
 <audio id="bgm" loop src=""></audio>
 
-<!-- ========== HERO ========== -->
+<!-- ========== HERO (หน้า 1) ========== -->
 <section class="hero">
   <p class="eyebrow">We are getting married</p>
   <h1 class="names">Zainun<br>&amp; Sadanan</h1>
@@ -561,6 +646,21 @@
     <div class="date-text">ตุลาคม<br>2026</div>
   </div>
 </section>
+
+<!-- ========== หน้า 2 : บนสุด (รูปการ์ดแต่งงานแบบซูมได้ไม่แตก) ========== -->
+<section class="reveal card-preview-section" id="wedding-card-section">
+  <div class="card-img-wrapper" onclick="openCardModal()">
+    <!-- เปลี่ยนชื่อไฟล์รูปภาพให้ตรงกับไฟล์รูปจริงของคุณได้ที่นี่ -->
+    <img src="30.png" alt="การ์ดแต่งงาน Zainun & Sadanan" id="cardImage">
+    <div class="zoom-hint-badge">🔍 แตะเพื่อดูการ์ดฉบับเต็ม / ซูม</div>
+  </div>
+</section>
+
+<!-- Pop-up แสดงภาพขยายใหญ่ 100% -->
+<div class="image-modal" id="cardModal" onclick="closeCardModal()">
+  <button class="close-modal-btn" aria-label="ปิด">&times;</button>
+  <img src="30.png" alt="การ์ดแต่งงาน ภาพขยายใหญ่">
+</div>
 
 <!-- ========== COUNTDOWN ========== -->
 <section class="reveal">
@@ -726,7 +826,20 @@
   revealEls.forEach(el => observer.observe(el));
 
   /* ==========================================================
-     B) COUNTDOWN TIMER
+     B) POP-UP LIGHTBOX (ซูมภาพการ์ดแต่งงาน)
+  ========================================================== */
+  function openCardModal() {
+    document.getElementById('cardModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCardModal() {
+    document.getElementById('cardModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  /* ==========================================================
+     C) COUNTDOWN TIMER
   ========================================================== */
   const weddingDate = new Date('2026-10-30T10:00:00').getTime();
 
@@ -755,13 +868,12 @@
   const timer = setInterval(updateCountdown, 1000);
 
   /* ==========================================================
-     C) MARQUEE 3 ROWS WITH GOOGLE SHEETS INTEGRATION
+     D) MARQUEE 3 ROWS WITH GOOGLE SHEETS INTEGRATION
   ========================================================== */
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTlqRewP52vFEwgBThJOnQaro8UYK2yNmdJI7OinN9RCSd55o1QKrQQ76Q5zWY6Yg/exec";
 
   const tracks = document.querySelectorAll('.marquee-track');
 
-  // ฟังก์ชันสำหรับใส่ข้อความคำอวยพรลงในแถบวิ่ง (สุ่มบรรทัด 1-3)
   function addWishToRandomTrack(name, msg) {
     const wishEl = document.createElement('div');
     wishEl.className = 'wish';
@@ -771,7 +883,6 @@
     randomTrack.appendChild(wishEl);
   }
 
-  // ดึงข้อมูลคำอวยพรทั้งหมดจาก Google Sheets มาแสดง
   async function loadWishesFromSheets() {
     tracks.forEach(track => track.innerHTML = '');
 
@@ -786,7 +897,6 @@
           addWishToRandomTrack(item.name, item.message);
         });
 
-        // คัดลอกข้อความเพื่อให้ตัวหนังสือวิ่งยาววนลูปได้อย่างต่อเนื่อง
         tracks.forEach(track => {
           track.innerHTML += track.innerHTML;
         });
@@ -798,7 +908,6 @@
 
   loadWishesFromSheets();
 
-  // ระบบส่งคำอวยพรบันทึกลง Google Sheets
   const wishForm = document.getElementById('wishForm');
   const submitBtn = wishForm.querySelector('button[type="submit"]');
 
@@ -813,10 +922,8 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'กำลังส่งคำอวยพร...';
 
-    // แสดงผลบนหน้าจอทันที
     addWishToRandomTrack(name, msg);
 
-    // ส่งข้อมูลลง Google Sheets
     if (GOOGLE_SCRIPT_URL) {
       try {
         await fetch(GOOGLE_SCRIPT_URL, {
@@ -837,7 +944,7 @@
   });
 
   /* ==========================================================
-     D) ปุ่มเล่น/หยุดเพลง
+     E) ปุ่มเล่น/หยุดเพลง
   ========================================================== */
   const soundBtn = document.getElementById('soundBtn');
   const bgm = document.getElementById('bgm');
