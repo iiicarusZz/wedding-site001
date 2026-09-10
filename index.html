@@ -176,8 +176,14 @@
   .card-preview-section {
     padding-top: var(--space-4);
     padding-bottom: var(--space-2);
+
+    /* 👇 เพิ่ม 3 บรรทัดนี้เพื่อปลดล็อกระยะขอบซ้าย-ขวา */
+    padding-left: 0.1rem;  /* เว้นขอบไว้นิดหน่อยเพื่อความสวยงาม (ถ้าอยากให้ชิดขอบจอเลยให้ใส่ 0) */
+    padding-right: 0.1rem;
+    max-width: 100%;
+
     width: 100%;
-    max-width: 980px; /* ขยายขนาดการ์ดให้กว้างเต็มตา */
+    /*max-width: 980px; ขยายขนาดการ์ดให้กว้างเต็มตา */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
