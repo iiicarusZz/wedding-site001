@@ -231,30 +231,36 @@
   .countdown {
     display: flex;
     justify-content: center;
-    gap: var(--space-2);
+    gap: 0.4rem;             /* ลดระยะห่างระหว่างกล่องลง */
     margin-top: var(--space-3);
-    flex-wrap: wrap;
+    flex-wrap: nowrap;        /* บังคับให้อยู่บรรทัดเดียว ไม่ให้ตกบรรทัด */
+    width: 100%;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .countdown .box {
     background: var(--panel);
     border: 1px solid rgba(242, 164, 9, 0.25);
-    border-radius: 12px;
-    padding: var(--space-2) var(--space-2);
-    min-width: 72px;
+    border-radius: 10px;
+    padding: 0.5rem 0.2rem;   /* ลด padding ด้านข้าง */
+    flex: 1;                 /* ให้ทั้ง 4 กล่องยืดหดแบ่งพื้นที่เท่าๆ กันพอดีหน้าจอ */
+    min-width: 0;            /* ป้องกันกล่องดันกันเอง */
   }
 
   .countdown .box strong {
     display: block;
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 1.5rem;       /* ปรับขนาดตัวเลขลงเล็กน้อยให้พอดีมือถือ (จากเดิม 2rem) */
     color: var(--gold);
+    line-height: 1.1;
   }
 
   .countdown .box span {
-    font-size: 0.75rem;
+    font-size: 0.7rem;       /* ลดขนาดป้ายบอก วัน/ชม./นาที นิดหน่อย */
     color: var(--muted);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.02em;
   }
 
   /* ==========================================================
@@ -468,7 +474,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0.3rem 0.4rem;
+    padding: 0.2rem 0.3rem;
     z-index: 80;
     box-shadow: 0 10px 25px rgba(55, 41, 17, 0.15);
   }
@@ -480,9 +486,9 @@
     gap: 0.15rem;
     color: var(--cream);
     text-decoration: none;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     font-weight: 500;
-    padding: 0.4rem 0.5rem;
+    padding: 0.25rem 0.3rem;
     border-radius: 12px;
     transition: background 0.25s ease, color 0.25s ease;
     flex: 1;
@@ -495,8 +501,8 @@
   }
 
   .bottom-nav svg {
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
     fill: currentColor;
   }
 
