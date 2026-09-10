@@ -16,9 +16,9 @@
   :root {
     --bg: #f4efe7;          /* พื้นหลังหลัก  */
     --panel: #d7cdb9;       /* พื้นหลังการ์ด/กล่อง */
-    --gold: #7290a3;        /* สีทอง สำหรับเน้น */
-    --blush: #7290a3;       /* We are getting married นับถอยหลัง*/
-    --cream: #6c5635;       /* สีตัวอักษรหลักบนพื้นเข้ม */
+    --gold: #7290a3;        /* สีสำหรับเน้น */
+    --blush: #7290a3;       /* นับถอยหลัง */
+    --cream: #6c5635;       /* สีตัวอักษรหลัก */
     --muted: #7290a3;       /* ตัวอักษรรอง */
     --font-display: 'Cormorant Garamond', 'Noto Serif Thai', serif;
     --font-body: 'Sarabun', sans-serif;
@@ -57,7 +57,7 @@
   }
 
   /* ==========================================================
-     0) ENVELOPE INTRO
+     2) ENVELOPE INTRO
   ========================================================== */
   body.intro-active { overflow: hidden; }
 
@@ -77,6 +77,7 @@
       radial-gradient(circle at center, #2d3b2f, #12180f);
     color: #e9e6e0;
     transition: opacity 0.9s ease, visibility 0.9s ease;
+    cursor: pointer;
   }
 
   #envelopeIntro.hidden {
@@ -116,8 +117,8 @@
     width: min(260px, 70vw);
     aspect-ratio: 3 / 2;
     position: relative;
-    cursor: pointer;
     perspective: 800px;
+    margin: 0 auto;
   }
 
   .envelope-body {
@@ -131,7 +132,7 @@
 
   .envelope-flap {
     position: absolute;
-    top: 0.5px; left: 0; right: 0;
+    top: 0; left: 0; right: 0;
     height: 0;
     border-left: calc(min(260px, 70vw) / 2) solid transparent;
     border-right: calc(min(260px, 70vw) / 2) solid transparent;
@@ -171,7 +172,7 @@
   }
 
   /* ==========================================================
-     4) ส่วนแสดงรูปภาพการ์ดแต่งงานแบบลอยโปร่งใส (รูปที่ 1 และ 2)
+     3) ส่วนแสดงรูปภาพการ์ดแต่งงาน
   ========================================================== */
   .card-preview-section {
     padding-top: var(--space-4);
@@ -179,33 +180,31 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     width: 100%;
-    max-width: 950px; /* ตั้งไว้กว้างๆ เพื่อให้รูปด้านในขยายได้ตามใจ */
+    max-width: 1000px; /* ขยายรองรับรูปที่ 1 บนคอม */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
 
-  /* 2. กำหนดขนาดแยกเฉพาะบนหน้าจอคอมพิวเตอร์ (ตั้งแต่ 768px ขึ้นไป) */
+  /* กำหนดขนาดแยกเฉพาะบนหน้าจอคอมพิวเตอร์ (ตั้งแต่ 768px ขึ้นไป) */
   @media (min-width: 768px) {
-    /* ปรับขนาดรูปที่ 1 บนคอม */
     #cardImage1 {
-      max-width: 980px; /* ปรับความกว้างรูปที่ 1 */
-      margin: 0 auto;   /* จัดให้อยู่ตรงกลาง */
+      max-width: 950px; /* ความกว้างรูปที่ 1 บนคอม */
+      margin: 0 auto;
     }
 
-    /* ปรับขนาดรูปที่ 2 บนคอม */
     #cardImage2 {
-      max-width: 520px; /* 👈 ย่อรูปที่ 2 ให้เล็กลงตามต้องการตรงนี้ได้เลย */
-      margin: 0 auto;   /* จัดให้อยู่ตรงกลาง */
+      max-width: 520px; /* ความกว้างรูปที่ 2 บนคอม */
+      margin: 0 auto;
     }
   }
 
   .card-img-wrapper {
     position: relative;
-    background: transparent; /* เอาพื้นหลังขาวออก */
-    border: none;             /* เอาขอบออก */
-    box-shadow: none;         /* เอากรอบเงาสี่เหลี่ยมออก */
+    background: transparent;
+    border: none;
+    box-shadow: none;
     border-radius: 0;
     overflow: visible;
   }
@@ -214,11 +213,8 @@
     width: 100%;
     height: auto;
     display: block;
-    /* เงาลอยสมจริงตามลายการ์ด SVG */
-    /*mix-blend-mode: multiply; /* ลบสีขาวออก และกลืนไปกับพื้นหลัง */
-    /*filter: drop-shadow(0 12px 24px rgba(55, 41, 17, 0.15));*/
     image-rendering: -webkit-optimize-contrast;
-    transform: translateZ(0); /* ช่วยแก้เบลอบน iOS */
+    transform: translateZ(0);
   }
 
   .divider {
@@ -230,7 +226,7 @@
   }
 
   /* ==========================================================
-     3) SCROLL REVEAL ANIMATION
+     4) SCROLL REVEAL ANIMATION
   ========================================================== */
   .reveal {
     opacity: 0;
@@ -248,9 +244,9 @@
   .countdown {
     display: flex;
     justify-content: center;
-    gap: 0.4rem;             /* ลดระยะห่างระหว่างกล่องลง */
+    gap: 0.4rem;
     margin-top: var(--space-3);
-    flex-wrap: nowrap;        /* บังคับให้อยู่บรรทัดเดียว ไม่ให้ตกบรรทัด */
+    flex-wrap: nowrap;
     width: 100%;
     max-width: 420px;
     margin-left: auto;
@@ -261,21 +257,21 @@
     background: var(--panel);
     border: 1px solid rgba(242, 164, 9, 0.25);
     border-radius: 10px;
-    padding: 0.5rem 0.2rem;   /* ลด padding ด้านข้าง */
-    flex: 1;                 /* ให้ทั้ง 4 กล่องยืดหดแบ่งพื้นที่เท่าๆ กันพอดีหน้าจอ */
-    min-width: 0;            /* ป้องกันกล่องดันกันเอง */
+    padding: 0.5rem 0.2rem;
+    flex: 1;
+    min-width: 0;
   }
 
   .countdown .box strong {
     display: block;
     font-family: var(--font-display);
-    font-size: 1.5rem;       /* ปรับขนาดตัวเลขลงเล็กน้อยให้พอดีมือถือ (จากเดิม 2rem) */
+    font-size: 1.5rem;
     color: var(--gold);
     line-height: 1.1;
   }
 
   .countdown .box span {
-    font-size: 0.7rem;       /* ลดขนาดป้ายบอก วัน/ชม./นาที นิดหน่อย */
+    font-size: 0.7rem;
     color: var(--muted);
     letter-spacing: 0.02em;
   }
@@ -482,7 +478,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - 1.5rem);
-    max-width: 400px;   /*ลดขนาดความกว้างรวม เมนู000000000000000000000000000000000*/
+    max-width: 400px;
     background: rgba(215, 205, 185, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -555,16 +551,16 @@
 
 <!-- ปุ่มเล่น/หยุดเพลง -->
 <button class="sound-btn" id="soundBtn" aria-label="เปิด/ปิดเพลง">♪</button>
-<audio id="bgm" loop src=""></audio>
+<audio id="bgm" loop></audio>
 
-<!-- ========== 1) ส่วนแสดงรูปภาพการ์ดแต่งงานแบบลอยโปร่งใส (รูปที่ 1 และ รูปที่ 2) ========== -->
+<!-- ========== 1) ส่วนแสดงรูปภาพการ์ดแต่งงาน (รูปที่ 1 และ รูปที่ 2) ========== -->
 <section class="reveal card-preview-section" id="wedding-card-section">
   <!-- รูปที่ 1 -->
   <div class="card-img-wrapper">
     <img src="74563.png" alt="การ์ดแต่งงาน Zainun & Sadanan รูปที่ 1" id="cardImage1">
   </div>
   
-  <!-- รูปที่ 2 (เปลี่ยนชื่อไฟล์รูปใน src="74564.svg" ได้ตามต้องการ) -->
+  <!-- รูปที่ 2 -->
   <div class="card-img-wrapper">
     <img src="888555.svg" alt="การ์ดแต่งงาน Zainun & Sadanan รูปที่ 2" id="cardImage2">
   </div>
@@ -704,12 +700,13 @@
 
 <script>
   /* ==========================================================
-     0) ENVELOPE INTRO
+     0) ENVELOPE INTRO (คลิกจุดไหนบนหน้าจอก็ได้เพื่อเปิดการ์ด)
   ========================================================== */
   const envelope = document.getElementById('envelope');
   const introScreen = document.getElementById('envelopeIntro');
 
-  envelope.addEventListener('click', () => {
+  introScreen.addEventListener('click', () => {
+    if (envelope.classList.contains('opened')) return;
     envelope.classList.add('opened');
 
     setTimeout(() => {
@@ -846,7 +843,8 @@
   let isPlaying = false;
 
   soundBtn.addEventListener('click', () => {
-    if (!bgm.src) {
+    const musicSrc = bgm.getAttribute('src');
+    if (!musicSrc || musicSrc.trim() === '') {
       alert('ยังไม่ได้ใส่ไฟล์เพลง — แก้ src ของ <audio id="bgm"> ในโค้ดก่อนนะครับ');
       return;
     }
