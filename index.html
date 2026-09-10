@@ -198,8 +198,10 @@
     height: auto;
     display: block;
     /* เงาลอยสมจริงตามลายการ์ด SVG */
-    mix-blend-mode: multiply; /* ลบสีขาวออก และกลืนไปกับพื้นหลัง */
-    filter: drop-shadow(0 12px 24px rgba(55, 41, 17, 0.15));
+    /*mix-blend-mode: multiply; /* ลบสีขาวออก และกลืนไปกับพื้นหลัง */
+    /*filter: drop-shadow(0 12px 24px rgba(55, 41, 17, 0.15));*/
+    image-rendering: -webkit-optimize-contrast;
+    transform: translateZ(0); /* ช่วยแก้เบลอบน iOS */
   }
 
   .divider {
@@ -457,7 +459,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - 1.5rem);
-    max-width: 500px;
+    max-width: 400px;   /*ลดขนาดความกว้างรวม เมนู000000000000000000000000000000000*/
     background: rgba(215, 205, 185, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
