@@ -171,7 +171,7 @@
   }
 
   /* ==========================================================
-     4) ส่วนแสดงรูปภาพการ์ดแต่งงานแบบลอยโปร่งใส (ย้ายขึ้นบนสุด)
+     4) ส่วนแสดงรูปภาพการ์ดแต่งงานแบบลอยโปร่งใส (รูปที่ 1 และ 2)
   ========================================================== */
   .card-preview-section {
     padding-top: var(--space-4);
@@ -179,21 +179,18 @@
     width: 100%;
     max-width: 950px; /* ขยายขนาดการ์ดให้กว้างเต็มตา */
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* ระยะห่างระหว่างรูปที่ 1 และ รูปที่ 2 */
   }
 
   .card-img-wrapper {
     position: relative;
-    cursor: pointer;
     background: transparent; /* เอาพื้นหลังขาวออก */
     border: none;             /* เอาขอบออก */
     box-shadow: none;         /* เอากรอบเงาสี่เหลี่ยมออก */
     border-radius: 0;
     overflow: visible;
-    transition: transform 0.35s ease;
-  }
-
-  .card-img-wrapper:hover {
-    transform: translateY(-4px);
   }
 
   .card-img-wrapper img {
@@ -201,116 +198,8 @@
     height: auto;
     display: block;
     /* เงาลอยสมจริงตามลายการ์ด SVG */
-    mix-blend-mode: multiply; /* 👈 เพิ่มบรรทัดนี้เพื่อลบสีขาวออก และกลืนไปกับพื้นหลัง */
+    mix-blend-mode: multiply; /* ลบสีขาวออก และกลืนไปกับพื้นหลัง */
     filter: drop-shadow(0 12px 24px rgba(55, 41, 17, 0.15));
-  }
-
-  .zoom-hint-badge {
-    position: absolute;
-    bottom: 10px;
-    right: 50%;
-    transform: translateX(50%);
-    background: rgba(18, 24, 15, 0.75);
-    color: #f4efe7;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.82rem;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    pointer-events: none;
-    white-space: nowrap;
-  }
-
-  /* POP-UP MODAL สำหรับดูภาพใหญ่ซูมไม่แตก */
-  .image-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: rgba(10, 15, 10, 0.92);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-  }
-
-  .image-modal.active {
-    display: flex;
-  }
-
-  .image-modal img {
-    max-width: 96%;
-    max-height: 90vh;
-    object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  }
-
-  .close-modal-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: #ffffff;
-    font-size: 2.2rem;
-    cursor: pointer;
-    background: none;
-    border: none;
-    line-height: 1;
-    padding: 5px 12px;
-  }
-
-  /* ==========================================================
-     2) HERO
-  ========================================================== */
-  .hero {
-    min-height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: var(--space-3) var(--space-3);
-  }
-
-  .hero .eyebrow {
-    color: var(--blush);
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 1.1rem;
-    letter-spacing: 0.05em;
-  }
-
-  .hero .names {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    color: var(--cream);
-    margin: var(--space-2) 0;
-  }
-
-  .hero .names span { 
-    display: block;
-    color: #ef0b0b;
-  }
-
-  .hero .date-block {
-    margin-top: var(--space-2);
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-2);
-  }
-
-  .hero .date-num {
-    font-family: var(--font-display);
-    font-size: clamp(4rem, 15vw, 7rem);
-    color: var(--gold);
-    line-height: 0.9;
-  }
-
-  .hero .date-text {
-    text-align: left;
-    color: var(--muted);
-    font-size: 0.95rem;
   }
 
   .divider {
@@ -643,27 +532,16 @@
 <button class="sound-btn" id="soundBtn" aria-label="เปิด/ปิดเพลง">♪</button>
 <audio id="bgm" loop src=""></audio>
 
-<!-- ========== 1) ส่วนแสดงรูปภาพการ์ดแต่งงานแบบลอยโปร่งใส (ขยับขึ้นมาไว้บนสุด) ========== -->
+<!-- ========== 1) ส่วนแสดงรูปภาพการ์ดแต่งงานแบบลอยโปร่งใส (รูปที่ 1 และ รูปที่ 2) ========== -->
 <section class="reveal card-preview-section" id="wedding-card-section">
-  <div class="card-img-wrapper" onclick="openCardModal()">
-    <img src="74563.svg" alt="การ์ดแต่งงาน Zainun & Sadanan" id="cardImage">
-    <div class="zoom-hint-badge">🔍 แตะเพื่อดูการ์ดฉบับเต็ม / ซูม</div>
+  <!-- รูปที่ 1 -->
+  <div class="card-img-wrapper">
+    <img src="74563.svg" alt="การ์ดแต่งงาน Zainun & Sadanan รูปที่ 1" id="cardImage1">
   </div>
-</section>
-
-<!-- Pop-up แสดงภาพขยายใหญ่ 100% -->
-<div class="image-modal" id="cardModal" onclick="closeCardModal()">
-  <button class="close-modal-btn" aria-label="ปิด">&times;</button>
-  <img src="74563.svg" alt="การ์ดแต่งงาน ภาพขยายใหญ่">
-</div>
-
-<!-- ========== 2) HERO ========== -->
-<section class="hero">
-  <p class="eyebrow">We are getting married</p>
-  <h1 class="names">Zainun<br>&amp; Sadanan</h1>
-  <div class="date-block">
-    <div class="date-num" id="dayNum">30</div>
-    <div class="date-text">ตุลาคม<br>2026</div>
+  
+  <!-- รูปที่ 2 (เปลี่ยนชื่อไฟล์รูปใน src="74564.svg" ได้ตามต้องการ) -->
+  <div class="card-img-wrapper">
+    <img src="888555.svg" alt="การ์ดแต่งงาน Zainun & Sadanan รูปที่ 2" id="cardImage2">
   </div>
 </section>
 
@@ -829,19 +707,6 @@
   }, { threshold: 0.15 });
 
   revealEls.forEach(el => observer.observe(el));
-
-  /* ==========================================================
-     B) POP-UP LIGHTBOX (ซูมภาพการ์ดแต่งงาน)
-  ========================================================== */
-  function openCardModal() {
-    document.getElementById('cardModal').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeCardModal() {
-    document.getElementById('cardModal').classList.remove('active');
-    document.body.style.overflow = '';
-  }
 
   /* ==========================================================
      C) COUNTDOWN TIMER
