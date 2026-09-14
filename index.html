@@ -995,7 +995,7 @@
   const wishForm = document.getElementById('wishForm');
   const submitBtn = wishForm.querySelector('button[type="submit"]');
 
-  wishForm.addEventListener('submit', async (e) => {
+  wishForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
     const name = document.getElementById('wishName').value.trim();
@@ -1003,29 +1003,36 @@
 
     if (!name || !msg) return;
 
+    // เคลียร์ฟอร์มและเปลี่ยนข้อความปุ่มทันทีแบบเรียลไทม์
+    const originalText = submitBtn.textContent;
+    /*submitBtn.textContent = 'ขอบคุณสำหรับคำอวยพรคู่บ่าวสาวครับ 🤍';*/
+    submitBtn.textContent = 'ถ้าจะพิมพ์งี้ ก็ไม่ต้องมาอวยครับ 🤍';
     submitBtn.disabled = true;
-    submitBtn.textContent = 'กำลังส่งคำอวยพร...';
+    wishForm.reset();
 
-    addWishToRandomTrack(name, msg);
+    // ใช้ requestAnimationFrame เพื่อดันงานไปเรนเดอร์ต่อทันทีโดยไม่ติดขัด
+    requestAnimationFrame(() => {
+      addWishToRandomTrack(name, msg);
+    });
 
+    // คืนค่าปุ่มกลับมาปกติหลังผ่านไป 1.5 วินาที
+    setTimeout(() => {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }, 2500);
+
+    // ส่งข้อมูลไปบันทึก Google Sheets แบบ Background ชนิดไม่รอผลลัพธ์
     if (GOOGLE_SCRIPT_URL) {
-      try {
-        await fetch(GOOGLE_SCRIPT_URL, {
+      navigator.sendBeacon ? 
+        navigator.sendBeacon(GOOGLE_SCRIPT_URL, JSON.stringify({ name: name, message: msg })) :
+        fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify({ name: name, message: msg })
-        });
-      } catch (err) {
-        console.error("ไม่สามารถบันทึกข้อมูลลง Google Sheets ได้:", err);
-      }
+        }).catch(() => {});
     }
-
-    alert('ขอบคุณสำหรับคำอวยพรครับ! 🤍');
-    wishForm.reset();
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'ส่งคำอวยพร 🤍';
-  });
+    });
 
   /* ==========================================================
      E) ปุ่มเล่น/หยุดเพลง
