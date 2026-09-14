@@ -1034,6 +1034,38 @@
     }
     });
 
+    // เก็บรายชื่อข้อความที่แสดงไปแล้ว เพื่อป้องกันไม่ให้ข้อความเก่าเด้งซ้ำซ้อน
+    const displayedWishes = new Set();
+
+    // ฟังก์ชันดึงข้อมูลคำอวยพรจาก Google Sheets แบบ Real-time
+    async function fetchAndSyncWishes() {
+      if (!GOOGLE_SCRIPT_URL) return;
+      try {
+        const response = await fetch(GOOGLE_SCRIPT_URL);
+        const wishes = await response.json();
+        
+        wishes.forEach(item => {
+          // สร้างกุญแจ (Key) เอกลักษณ์จากชื่อและข้อความ
+          const wishKey = `${item.name}-${item.message}`;
+        
+          // ถ้ายังไม่เคยแสดงบนหน้าจอ ให้จับยัดใส่แถบวิ่งทันที
+          if (!displayedWishes.has(wishKey)) {
+            displayedWishes.add(wishKey);
+            // เรียกฟังก์ชันเพิ่มลงแถบวิ่งที่มีอยู่แล้วในเว็บของคุณ
+            if (typeof addWishToRandomTrack === 'function') {
+              addWishToRandomTrack(item.name, item.message);
+            } 
+          }
+        });
+      } catch (err) {
+        console.error("Sync error:", err);
+      }
+  }
+
+  // เริ่มต้นดึงข้อมูลทันที และเช็กข้อมูลใหม่ทุกๆ 3 วินาที
+  fetchAndSyncWishes();
+  setInterval(fetchAndSyncWishes, 3000);
+
   /* ==========================================================
      E) ปุ่มเล่น/หยุดเพลง
   ========================================================== */
