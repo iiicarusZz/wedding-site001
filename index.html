@@ -97,7 +97,7 @@
   }
 
   /* ==========================================================
-     2) ENVELOPE INTRO
+     2) ENVELOPE INTRO (ดีไซน์ใหม่)
   ========================================================== */
   body.intro-active { overflow: hidden; }
 
@@ -110,9 +110,9 @@
     align-items: center;
     justify-content: space-between;
     text-align: center;
-    padding: 3rem 1.5rem;
+    padding: 2.5rem 1.5rem;
     background:
-      linear-gradient(135deg, rgba(18,28,23,0.45) 0%, rgba(8,14,11,0.65) 100%),
+      linear-gradient(135deg, rgba(18,28,23,0.55) 0%, rgba(8,14,11,0.75) 100%),
       url('789.jpg') center/cover no-repeat,
       radial-gradient(circle at center, #2d3b2f 0%, #12180f 100%);
     color: #e9e6e0;
@@ -132,7 +132,7 @@
   }
 
   #envelopeIntro .eyebrow {
-    font-size: 1rem;
+    font-size: 0.9rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: #f4efe7;
@@ -141,77 +141,177 @@
 
   #envelopeIntro .couple-script {
     font-family: 'Alex Brush', cursive;
-    font-size: clamp(2.8rem, 9vw, 4.5rem);
+    font-size: clamp(2.8rem, 9vw, 4.2rem);
     line-height: 1.15;
     color: #e9e6e0;
-    margin-top: var(--space-2);
+    margin-top: 0.2rem;
     text-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
 
   #envelopeIntro .open-hint {
     font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    color: #e9e6e0;
+    letter-spacing: 0.08em;
+    color: #f0ece1;
+    animation: pulseText 1.8s infinite ease-in-out;
+  }
+
+  @keyframes pulseText {
+    0%, 100% { opacity: 0.6; transform: scale(0.98); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
+  /* โครงสร้าง ซองจดหมาย 3D */
+  .envelope-wrapper {
+    width: min(300px, 80vw);  /* ความกว้างของซอง */
+    height: 200px;  /* ความสูงของซอง */
+    position: relative;
+    perspective: 1000px;
+    margin: 1.5rem auto 0 auto;
   }
 
   .envelope {
-    width: min(260px, 70vw);
-    aspect-ratio: 3 / 2;
+    width: 100%;
+    height: 100%;
     position: relative;
-    perspective: 800px;
-    margin: 0 auto;
+    background: #e8decb;  /* สีพื้นหลังของซอง */
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 20px rgba(0,0,0,0.05); /* เงารอบซอง */
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
   }
 
-  .envelope-body {
+  /* ฝาพับด้านหลังภายใน */
+  .envelope-inner {
     position: absolute;
     inset: 0;
-    background: linear-gradient(160deg, #fbf8f2 0%, #e8decb 100%);
-    border-radius: 6px;
-    box-shadow: 0 15px 35px rgba(35, 25, 10, 0.4);
-    border: 1px solid rgba(180, 150, 105, 0.4);
+    background: #d8cbbe; 
+    border-radius: 8px;
+    overflow: hidden;
   }
 
-  .envelope-flap {
+  /* แผ่นการ์ดด้านในที่สไลด์ขึ้น */
+  .envelope-card {
+    position: absolute;
+    bottom: 10px;
+    left: 5%;
+    width: 90%;
+    height: 85%;
+    background: #ffffff;  /* สีการ์ดข้างใน */
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+    z-index: 2;
+    border: 1px solid #e2d7c3; /* ขอบการ์ด */
+  }
+
+  .envelope-card .card-title {
+    font-family: 'Alex Brush', cursive;
+    font-size: 1.8rem;
+    color: #5b4628;
+  }
+
+  .envelope-card .card-sub {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: #8c7b65;
+    text-transform: uppercase;
+  }
+
+  /* พับด้านซ้าย ขวา และ ล่าง ของซอง */
+  .envelope-flap-left {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 0;
+    border-top: 100px solid transparent;
+    border-bottom: 100px solid transparent;
+    border-left: 150px solid #e0d5c1;
+    z-index: 3;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+
+  .envelope-flap-right {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 0; height: 0;
+    border-top: 100px solid transparent;
+    border-bottom: 100px solid transparent;
+    border-right: 150px solid #e0d5c1;
+    z-index: 3;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  .envelope-flap-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    width: 0; height: 0;
+    margin: 0 auto;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 110px solid #d4c7b1;
+    z-index: 3;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  /* ฝาเปิดปิดด้านบน */
+  .envelope-flap-top {
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 0;
-    border-left: calc(min(260px, 70vw) / 2) solid transparent;
-    border-right: calc(min(260px, 70vw) / 2) solid transparent;
-    border-top: calc(min(260px, 70vw) * 0.38) solid #d1c4aa;
+    width: 0; height: 0;
+    margin: 0 auto;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 115px solid #cbbeaa; /* เปลี่ยนสีฝาเปิดด้านบนตรงนี้ */
     transform-origin: top center;
-    transition: transform 0.7s ease;
-    z-index: 2;
-    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
+    transition: transform 0.6s ease 0.1s, z-index 0.2s ease 0.3s;
+    z-index: 5;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
   }
 
-  .envelope.opened .envelope-flap {
-    transform: rotateX(180deg);
-  }
-
-  .envelope-monogram {
+  /* ตราประทับครั่ง (Wax Seal) */
+  .envelope-seal {
     position: absolute;
-    top: 28%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50px;
-    height: 44px;
+    width: 48px; /* ขนาดความกว้างตราประทับ */
+    height: 48px; /* ขนาดความสูงตราประทับ */
     border-radius: 50%;
-    background: linear-gradient(135deg, #ffffff 0%, #f4efe7 100%);
-    border: 1px solid #a89878;
+    background: radial-gradient(circle at 30% 30%, #7e7d5e, #7e7d5e); /* ไล่เฉดสีตราประทับ */
+    border: 2px solid #7e7d5e; /* สีขอบตราประทับ */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.35), inset 0 2px 4px rgba(255,255,255,0.25); /* สีตัวอักษร Z&S ในตราประทับ */
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-display);
-    font-style: italic;
-    color: #6f644a;
-    font-size: 1.1rem;
-    z-index: 3;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    font-weight: 700;
+    color: #f1e4c3;
+    font-size: 0.95rem;
+    z-index: 6;
+    transition: opacity 0.4s ease, transform 0.4s ease;
   }
 
-  .envelope.opened {
-    transform: scale(1.05);
-    transition: transform 0.4s ease 0.7s;
+  /* สภาวะเมื่อเปิดซอง (Opened State) */
+  .envelope.opened .envelope-flap-top {
+    transform: rotateX(180deg);
+    z-index: 1;
+  }
+
+  .envelope.opened .envelope-seal {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+
+  .envelope.opened .envelope-card {
+    transform: translateY(-80px);
   }
 
   /* ==========================================================
@@ -395,7 +495,6 @@
     box-shadow: 0 8px 25px rgba(114, 144, 163, 0.08);
   }
 
-  /* คอนเทนเนอร์รวม 3 แถบสไลด์แบบไร้กรอบใหญ่ */
   .marquee-fullscreen-group {
     display: flex;
     flex-direction: column;
@@ -407,7 +506,6 @@
     padding: 0.5rem 0;
   }
 
-  /* แต่ละแถบกรอบแนวยาวเต็มจอ */
   .marquee-wrap {
     overflow: hidden;
     width: 100%;
@@ -491,8 +589,8 @@
 
   .contact-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* บังคับเป็น 2 คอลัมน์ (ซ้าย-ขวา) บนมือถือ */
-    gap: 1.25rem 0.5rem;                  /* ระยะห่างระหว่างแถวและคอลัมน์ */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 0.5rem;
   }
 
   .contact-item {
@@ -502,14 +600,14 @@
   .contact-item strong {
     color: var(--cream);
     display: block;
-    font-size: 0.95rem; /* ปรับขนาดฟอนต์ให้พอดีกับ 2 คอลัมน์ในมือถือ */
+    font-size: 0.95rem;
     margin-bottom: 0.2rem;
   }
 
   .contact-item p {
     margin: 0;
     color: var(--muted);
-    font-size: 0.85rem; /* ปรับขนาดเบอร์โทรให้ไม่ล้นบรรทัด */
+    font-size: 0.85rem;
   }
 
   .contact-item a {
@@ -660,21 +758,31 @@
 <div id="flowerContainer"></div>
 
 <!-- ==========================================================
-     หน้าปกซอง
+     หน้าปกซอง (INTRO ENVELOPE)
 ========================================================== -->
 <div id="envelopeIntro">
   <div>
     <p class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-    <p class="eyebrow">The beginning of</p>
-    <h1 class="couple-script">Zainun<br>Sadanan</h1>
+    <p class="eyebrow">The wedding of</p>
+    <h1 class="couple-script"> Zainun<br>Sadanan</h1>
   </div>
 
-  <div>
-    <p class="open-hint" style="margin-bottom: 1rem;">แตะหน้าจอเพื่อดูการ์ด</p>
-    <div class="envelope" id="envelope">
-      <div class="envelope-monogram">Z&amp;F</div>
-      <div class="envelope-body"></div>
-      <div class="envelope-flap"></div>
+  <div style="width: 100%;">
+    <p class="open-hint">แตะเพื่อเปิดดูคำเชิญ </p>
+    
+    <div class="envelope-wrapper">
+      <div class="envelope" id="envelope">
+        <div class="envelope-inner"></div>
+        <div class="envelope-card">
+          <span class="card-title">Z &amp; F</span>
+          <span class="card-sub">Wedding Invitation</span>
+        </div>
+        <div class="envelope-flap-left"></div>
+        <div class="envelope-flap-right"></div>
+        <div class="envelope-flap-bottom"></div>
+        <div class="envelope-flap-top"></div>
+        <div class="envelope-seal">Z&amp;F</div>
+      </div>
     </div>
   </div>
 </div>
@@ -885,8 +993,11 @@
 
   introScreen.addEventListener('click', () => {
     if (envelope.classList.contains('opened')) return;
+    
+    // สั่งเปิดซองจดหมาย
     envelope.classList.add('opened');
 
+    // เล่นเพลง
     bgm.volume = 0.1;
     bgm.playbackRate = 0.87;
     bgm.play().then(() => {
@@ -897,10 +1008,11 @@
       console.log("Autoplay blocked:", error);
     });
 
+    // หน่วงเวลาเพื่อให้แอนิเมชันเปิดการ์ดสไลด์ขึ้นจนจบ ก่อนจางหายไป
     setTimeout(() => {
       introScreen.classList.add('hidden');
       document.body.classList.remove('intro-active');
-    }, 700);
+    }, 1200);
   });
 
   /* ==========================================================
@@ -956,20 +1068,19 @@
   const displayedWishes = new Set();
 
   function addWishToRandomTrack(name, msg) {
-  const wishEl = document.createElement('div');
-  wishEl.className = 'wish';
-  wishEl.textContent = `${msg} — ${name}`;
+    const wishEl = document.createElement('div');
+    wishEl.className = 'wish';
+    wishEl.textContent = `${msg} — ${name}`;
 
-  // หาแถบที่มีจำนวนข้อความน้อยที่สุดเพื่อกระจายให้เท่ากัน
-  let targetTrack = tracks[0];
-  tracks.forEach(track => {
-    if (track.children.length < targetTrack.children.length) {
-      targetTrack = track;
-    }
-  });
+    let targetTrack = tracks[0];
+    tracks.forEach(track => {
+      if (track.children.length < targetTrack.children.length) {
+        targetTrack = track;
+      }
+    });
 
-  targetTrack.appendChild(wishEl);
-}
+    targetTrack.appendChild(wishEl);
+  }
 
   async function fetchAndSyncWishes() {
     if (!GOOGLE_SCRIPT_URL) return;
@@ -991,7 +1102,6 @@
     }
   }
 
-  // เริ่มต้นดึงข้อมูลทันที และเช็กข้อมูลใหม่ทุกๆ 3 วินาที
   fetchAndSyncWishes();
   setInterval(fetchAndSyncWishes, 3000);
 
@@ -1038,7 +1148,8 @@
   /* ==========================================================
      E) ปุ่มเล่น/หยุดเพลง
   ========================================================== */
-  soundBtn.addEventListener('click', () => {
+  soundBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     const musicSrc = bgm.getAttribute('src');
     if (!musicSrc || musicSrc.trim() === '') {
       alert('ยังไม่ได้ใส่ไฟล์เพลง');
@@ -1049,16 +1160,17 @@
       bgm.pause();
       soundBtn.textContent = '♪';
       soundBtn.classList.remove('playing');
+      isPlaying = false;
     } else {
-      bgm.volume = 0.1;
-      bgm.playbackRate = 0.87;
-      bgm.play();
-      soundBtn.textContent = '❚❚';
-      soundBtn.classList.add('playing');
+      bgm.play().then(() => {
+        soundBtn.textContent = '❚❚';
+        soundBtn.classList.add('playing');
+        isPlaying = true;
+      }).catch(err => {
+        console.log("Play failed:", err);
+      });
     }
-    isPlaying = !isPlaying;
   });
 </script>
-
 </body>
 </html>
