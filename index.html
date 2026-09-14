@@ -279,11 +279,11 @@
   .countdown {
     display: flex;
     justify-content: center;
-    gap: 0.4rem;
+    gap: 0.8rem;             /* <--- ลด gap ลงเหลือ 0.5rem เพื่อเพิ่มพื้นที่ความกว้างกล่อง */
     margin-top: var(--space-3);
     flex-wrap: nowrap;
     width: 100%;
-    max-width: 420px;
+    max-width: 360px;        /* <--- ขยายความกว้างรวมเป็น 440px (ถ้าใช้ 350px กล่องจะแคบมาก) */
     margin-left: auto;
     margin-right: auto;
   }
@@ -292,23 +292,30 @@
     background: var(--panel);
     border: 1px solid rgba(242, 164, 9, 0.25);
     border-radius: 10px;
-    padding: 0.5rem 0.2rem;
+    padding: 0.8rem 0.3rem;  /* <--- ลด padding บน-ล่างลงเหลือ 0.6rem เพื่อไม่ให้กล่องสูงเกินไป */
+    aspect-ratio: 3 / 4; /* <--- บังคับให้อัตราส่วนสูงกว่ากว้างเสมอ (ทรงแนวตั้ง) */
     flex: 1;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* ชิดบน-ชิดล่าง */
+     align-items: center;
   }
 
   .countdown .box strong {
     display: block;
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 2rem;      /* <--- ปรับขนาดตัวเลขลงเล็กน้อยให้พอดีกล่อง */
     color: var(--gold);
-    line-height: 1.1;
+    line-height: 1;
+    margin-top: 0.2rem;
   }
 
   .countdown .box span {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: var(--muted);
     letter-spacing: 0.02em;
+    margin-bottom: 0.2rem;
   }
 
   /* ==========================================================
@@ -410,6 +417,17 @@
 
   .info-card p { margin: var(--space-1) 0; color: var(--muted); }
   .info-card strong { color: var(--cream); }
+
+  .dresscode-img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 12px;
+    margin-top: 0.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   .map-btn {
     display: inline-flex;
@@ -528,7 +546,7 @@
     border: 1px solid rgba(114, 144, 163, 0.3);
     border-radius: 999px;
     display: flex;
-    justify-content: space-around;
+    justify-space-around;
     align-items: center;
     padding: 0.2rem 0.3rem;
     z-index: 80;
@@ -686,9 +704,19 @@
     <p><strong>วันที่:</strong> 30 ตุลาคม 2569 (ตรงกับวันศุกร์)</p>
     <p><strong>เวลา:</strong> 10:00 - 18:00 น.</p>
     <p><strong>สถานที่:</strong> บ้านปากจด, สงขลา (บ้านเจ้าบ่าว)</p>
-    <p><strong>การแต่งกาย:</strong> ชุดสุภาพโทนสีทอง/เขียวเข้ม</p>
     
+    <!-- จุดที่แก้ไข: วงกลมสีธีมการแต่งกาย 4 สี -->
     <div style="margin-top: 1.25rem;">
+      <strong style="color: var(--cream); display: block; margin-bottom: 0.75rem;">ธีมการแต่งกาย:</strong>
+      <div style="display: flex; justify-content: center; align-items: center; gap: 0.75rem;">
+        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #603314; display: inline-block; box-shadow: 0 2px 6px rgba(0,0,0,0.15); border: 2px solid #603314;"></span>
+        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #758925; display: inline-block; box-shadow: 0 2px 6px rgba(0,0,0,0.15); border: 2px solid #758925;"></span>
+        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #b5c49a; display: inline-block; box-shadow: 0 2px 6px rgba(0,0,0,0.15); border: 2px solid #b5c49a;"></span>
+        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #dfa0aa; display: inline-block; box-shadow: 0 2px 6px rgba(0,0,0,0.15); border: 2px solid #dfa0aa;"></span>
+      </div>
+    </div>
+    
+    <div style="margin-top: 1.5rem;">
       <a href="https://maps.app.goo.gl/Fk1ke2xK3sx3zTk46" target="_blank" rel="noopener" class="map-btn">
         📍 ดูสถานที่ใน Google Maps
       </a>
@@ -751,7 +779,7 @@
      BACKGROUND FLOATING FLOWERS
   ========================================================== */
   const flowerContainer = document.getElementById('flowerContainer');
-  const FLOWER_IMAGE_SRC = '224466.PNG'; // 👈 เปลี่ยนชื่อไฟล์รูปดอกไม้ของคุณตรงนี้
+  const FLOWER_IMAGE_SRC = '224466.png';
 
   function createFlower() {
     if (!flowerContainer) return;
