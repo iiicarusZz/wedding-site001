@@ -399,7 +399,7 @@
   .marquee-fullscreen-group {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
     width: 100vw;
     position: relative;
     left: 50%;
@@ -411,16 +411,20 @@
   .marquee-wrap {
     overflow: hidden;
     width: 100%;
+    height: 32px; /* กำหนดความสูงตายตัว เช่น 30px - 36px ตามความเหมาะสม */
     background: rgba(245, 238, 226, 0.6);
     backdrop-filter: blur(4px);
     border-top: 1px solid rgba(180, 160, 130, 0.35);
     border-bottom: 1px solid rgba(180, 160, 130, 0.35);
-    padding: 0.6rem 0;
+    padding: 0; /* เอา padding ออกเพื่อให้ความสูงถูกควบคุมด้วย height ด้านบน */
+    display: flex;
+    align-items: center; /* จัดตัวหนังสือให้อยู่กึ่งกลางแนวตั้งเสมอ */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   }
 
   .marquee-track {
     display: flex;
+    height: 100%; /* ให้แทร็กวิ่งเต็มความสูงของแถบ */
     width: max-content;
     animation: scroll-right 25s linear infinite;
     align-items: center;
@@ -445,7 +449,7 @@
       padding: 0.35rem 1.1rem;
       margin: 0 1.2rem;
       white-space: nowrap;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--cream);
       font-weight: 500;
       box-shadow: none;
@@ -583,6 +587,17 @@
     transform: scale(1.08);
   }
 
+  /* อนิเมชันหมุน */
+  @keyframes spinRecord {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* เมื่อกำลังเล่นเพลง ให้เพิ่มคลาสนี้เพื่อให้ปุ่มหมุน */
+  .sound-btn.playing {
+    animation: spinRecord 3s linear infinite;
+  }
+
   /* ==========================================================
      11) BOTTOM NAVIGATION BAR
   ========================================================== */
@@ -668,7 +683,7 @@
 
 <!-- ปุ่มเล่น/หยุดเพลง -->
 <button class="sound-btn" id="soundBtn" aria-label="เปิด/ปิดเพลง">♪</button>
-<audio id="bgm" loop></audio>
+<audio id="bgm" src="wedding-song.mp3" loop></audio>
 
 <!-- ========== 1) ส่วนแสดงรูปภาพการ์ดแต่งงาน (รูปที่ 1 และ รูปที่ 2) ========== -->
 <section class="reveal card-preview-section" id="wedding-card-section">
@@ -804,7 +819,9 @@
 </section>
 
 <footer>
-  Zainun &amp; Sadanan · 30.10.2026
+  <h2 style="font-size:1.3rem;"> بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا </h2>
+   Zainun &amp; Sadanan · 30.10.2026
+
 </footer>
 
 <!-- ========== BOTTOM NAVIGATION BAR ========== -->
@@ -861,14 +878,27 @@
   setInterval(createFlower, 700);
 
   /* ==========================================================
-     0) ENVELOPE INTRO
+     0) ENVELOPE INTRO เปิดซอง เพลงเล่น
   ========================================================== */
   const envelope = document.getElementById('envelope');
   const introScreen = document.getElementById('envelopeIntro');
+  const bgm = document.getElementById('bgm');
+  const soundBtn = document.getElementById('soundBtn');
+  let isPlaying = false; // ย้ายตัวแปรนี้มาไว้ด้านบนสุดเพื่อให้ใช้งานร่วมกันได้
 
   introScreen.addEventListener('click', () => {
     if (envelope.classList.contains('opened')) return;
     envelope.classList.add('opened');
+
+    // สั่งให้เพลงเล่นอัตโนมัติพร้อมปรับเสียง 50% และหมุนปุ่ม
+    bgm.volume = 0.1;
+    bgm.play().then(() => {
+      isPlaying = true;
+      soundBtn.textContent = '❚❚';
+      soundBtn.classList.add('playing');
+    }).catch(error => {
+      console.log("Autoplay blocked:", error);
+    });
 
     setTimeout(() => {
       introScreen.classList.add('hidden');
@@ -999,22 +1029,22 @@
   /* ==========================================================
      E) ปุ่มเล่น/หยุดเพลง
   ========================================================== */
-  const soundBtn = document.getElementById('soundBtn');
-  const bgm = document.getElementById('bgm');
-  let isPlaying = false;
-
   soundBtn.addEventListener('click', () => {
     const musicSrc = bgm.getAttribute('src');
     if (!musicSrc || musicSrc.trim() === '') {
-      alert('ยังไม่ได้ใส่ไฟล์เพลง — แก้ src ของ <audio id="bgm"> ในโค้ดก่อนนะครับ');
+      alert('wedding-song');
       return;
     }
+    
     if (isPlaying) {
       bgm.pause();
       soundBtn.textContent = '♪';
+      soundBtn.classList.remove('playing');
     } else {
+      bgm.volume = 0.1;
       bgm.play();
       soundBtn.textContent = '❚❚';
+      soundBtn.classList.add('playing');
     }
     isPlaying = !isPlaying;
   });
