@@ -97,7 +97,7 @@
   }
 
   /* ==========================================================
-     2) ENVELOPE INTRO (ดีไซน์ใหม่)
+     2) ENVELOPE INTRO (แก้ไขโครงสร้าง Layer ไม่ให้ซ้อนทับชนกัน)
   ========================================================== */
   body.intro-active { overflow: hidden; }
 
@@ -116,7 +116,7 @@
       url('789.jpg') center/cover no-repeat,
       radial-gradient(circle at center, #2d3b2f 0%, #12180f 100%);
     color: #e9e6e0;
-    transition: opacity 0.9s ease, visibility 0.9s ease;
+    transition: opacity 1.2s ease, visibility 1.2s ease;
     cursor: pointer;
   }
 
@@ -162,8 +162,8 @@
 
   /* โครงสร้าง ซองจดหมาย 3D */
   .envelope-wrapper {
-    width: min(300px, 80vw);  /* ความกว้างของซอง */
-    height: 200px;  /* ความสูงของซอง */
+    width: 280px;
+    height: 190px;
     position: relative;
     perspective: 1000px;
     margin: 1.5rem auto 0 auto;
@@ -173,40 +173,40 @@
     width: 100%;
     height: 100%;
     position: relative;
-    background: #e8decb;  /* สีพื้นหลังของซอง */
+    background: #e8decb;
     border-radius: 8px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 20px rgba(0,0,0,0.05); /* เงารอบซอง */
-    transform-style: preserve-3d;
-    transition: transform 0.6s ease;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
   }
 
-  /* ฝาพับด้านหลังภายใน */
+  /* แผ่นรองซองจดหมายด้านใน */
   .envelope-inner {
     position: absolute;
     inset: 0;
     background: #d8cbbe; 
     border-radius: 8px;
     overflow: hidden;
+    z-index: 1;
   }
 
   /* แผ่นการ์ดด้านในที่สไลด์ขึ้น */
   .envelope-card {
     position: absolute;
-    bottom: 10px;
-    left: 5%;
-    width: 90%;
-    height: 85%;
-    background: #ffffff;  /* สีการ์ดข้างใน */
+    bottom: 8px;
+    left: 4%;
+    width: 92%;
+    height: 88%;
+    background: #ffffff;
     border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+    /* เลื่อนขึ้นสมูท ช้ากำลังดี */
+    transition: transform 1.1s cubic-bezier(0.25, 1, 0.5, 1) 0.4s;
     z-index: 2;
-    border: 1px solid #e2d7c3; /* ขอบการ์ด */
+    border: 1px solid #e2d7c3;
   }
 
   .envelope-card .card-title {
@@ -223,29 +223,27 @@
     text-transform: uppercase;
   }
 
-  /* พับด้านซ้าย ขวา และ ล่าง ของซอง */
+  /* พับซ้าย-ขวา-ล่าง (อยู่ด้านหน้าการ์ดเสมอ เพื่อปิดโคนซอง) */
   .envelope-flap-left {
     position: absolute;
-    bottom: 0; left: 0;
+    top: 0; left: 0; bottom: 0;
     width: 0; height: 0;
-    border-top: 100px solid transparent;
-    border-bottom: 100px solid transparent;
-    border-left: 150px solid #e0d5c1;
+    border-top: 95px solid transparent;
+    border-bottom: 95px solid transparent;
+    border-left: 140px solid #e0d5c1;
     z-index: 3;
-    border-bottom-left-radius: 8px;
-    border-top-left-radius: 8px;
+    pointer-events: none;
   }
 
   .envelope-flap-right {
     position: absolute;
-    bottom: 0; right: 0;
+    top: 0; right: 0; bottom: 0;
     width: 0; height: 0;
-    border-top: 100px solid transparent;
-    border-bottom: 100px solid transparent;
-    border-right: 150px solid #e0d5c1;
+    border-top: 95px solid transparent;
+    border-bottom: 95px solid transparent;
+    border-right: 140px solid #e0d5c1;
     z-index: 3;
-    border-bottom-right-radius: 8px;
-    border-top-right-radius: 8px;
+    pointer-events: none;
   }
 
   .envelope-flap-bottom {
@@ -253,27 +251,26 @@
     bottom: 0; left: 0; right: 0;
     width: 0; height: 0;
     margin: 0 auto;
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-    border-bottom: 110px solid #d4c7b1;
-    z-index: 3;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-bottom: 105px solid #d4c7b1;
+    z-index: 4;
+    pointer-events: none;
   }
 
-  /* ฝาเปิดปิดด้านบน */
+  /* ฝาปิดด้านบน (Top Flap) */
   .envelope-flap-top {
     position: absolute;
     top: 0; left: 0; right: 0;
     width: 0; height: 0;
     margin: 0 auto;
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-    border-top: 115px solid #cbbeaa; /* เปลี่ยนสีฝาเปิดด้านบนตรงนี้ */
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-top: 105px solid #cbbeaa;
     transform-origin: top center;
-    transition: transform 0.6s ease 0.1s, z-index 0.2s ease 0.3s;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s ease 0.4s;
     z-index: 5;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.15));
   }
 
   /* ตราประทับครั่ง (Wax Seal) */
@@ -282,27 +279,29 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 48px; /* ขนาดความกว้างตราประทับ */
-    height: 48px; /* ขนาดความสูงตราประทับ */
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #7e7d5e, #7e7d5e); /* ไล่เฉดสีตราประทับ */
-    border: 2px solid #7e7d5e; /* สีขอบตราประทับ */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.35), inset 0 2px 4px rgba(255,255,255,0.25); /* สีตัวอักษร Z&S ในตราประทับ */
+    background: radial-gradient(circle at 35% 35%, #8f7956 0%, #685437 70%, #4f3f27 100%);
+    border: 1px solid rgba(255, 235, 195, 0.4);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.3);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-display);
-    font-weight: 700;
-    color: #f1e4c3;
-    font-size: 0.95rem;
+    font-family: 'Alex Brush', cursive;
+    font-weight: 400;
+    color: #f7ecd9;
+    font-size: 1.2rem;
+    padding-top: 2px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     z-index: 6;
     transition: opacity 0.4s ease, transform 0.4s ease;
   }
 
-  /* สภาวะเมื่อเปิดซอง (Opened State) */
+  /* สภาวะเมื่อเปิดซอง (เปิดฝาบนเลื่อนลงหลังการ์ด และเลื่อนการ์ดขึ้นอย่างสวยงาม) */
   .envelope.opened .envelope-flap-top {
     transform: rotateX(180deg);
-    z-index: 1;
+    z-index: 1; /* ส่งฝาบนไปไว้ข้างหลังสุดเมื่อเปิดแล้ว */
   }
 
   .envelope.opened .envelope-seal {
@@ -311,7 +310,7 @@
   }
 
   .envelope.opened .envelope-card {
-    transform: translateY(-80px);
+    transform: translateY(-65px); /* ระยะที่การ์ดโผล่ขึ้นมาให้พอดีสวยงาม */
   }
 
   /* ==========================================================
@@ -764,11 +763,11 @@
   <div>
     <p class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
     <p class="eyebrow">The wedding of</p>
-    <h1 class="couple-script"> Zainun<br>Sadanan</h1>
+    <h1 class="couple-script">Zainun<br>Sadanan</h1>
   </div>
 
   <div style="width: 100%;">
-    <p class="open-hint">แตะเพื่อเปิดดูคำเชิญ </p>
+    <p class="open-hint">แตะเพื่อเปิดดูคำเชิญ</p>
     
     <div class="envelope-wrapper">
       <div class="envelope" id="envelope">
@@ -983,7 +982,7 @@
   setInterval(createFlower, 700);
 
   /* ==========================================================
-     0) ENVELOPE INTRO เปิดซอง เพลงเล่น
+     0) ENVELOPE INTRO
   ========================================================== */
   const envelope = document.getElementById('envelope');
   const introScreen = document.getElementById('envelopeIntro');
@@ -1008,11 +1007,11 @@
       console.log("Autoplay blocked:", error);
     });
 
-    // หน่วงเวลาเพื่อให้แอนิเมชันเปิดการ์ดสไลด์ขึ้นจนจบ ก่อนจางหายไป
+    // หน่วงเวลาโชว์การ์ดด้านในสั้นๆ ก่อนจางหายเข้าหน้าหลัก
     setTimeout(() => {
       introScreen.classList.add('hidden');
       document.body.classList.remove('intro-active');
-    }, 1200);
+    }, 2400);
   });
 
   /* ==========================================================
