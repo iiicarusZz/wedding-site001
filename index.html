@@ -7,19 +7,21 @@
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+Thai:wght@400;500;600&family=Sarabun:wght@300;400;500&family=Amiri:wght@400;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+Thai:wght@400;500;600&family=Sarabun:wght@300;400;500;600&family=Amiri:wght@400;700&family=Alex+Brush&display=swap" rel="stylesheet">
 
 <style>
   /* ==========================================================
-     1) CSS VARIABLES
+     1) CSS VARIABLES & GRADIENTS
   ========================================================== */
   :root {
-    --bg: #f4efe7;          /* พื้นหลังหลัก  */
-    --panel: #d7cdb9;       /* พื้นหลังการ์ด/กล่อง */
-    --gold: #7290a3;        /* สีสำหรับเน้น */
-    --blush: #7290a3;       /* นับถอยหลัง */
-    --cream: #6c5635;       /* สีตัวอักษรหลัก */
-    --muted: #7290a3;       /* ตัวอักษรรอง */
+    --bg-gradient: linear-gradient(180deg, #f9f6f0 0%, #f1ebdf 50%, #e7decb 100%);
+    --panel-gradient: linear-gradient(145deg, #fdfbf7 0%, #e2d7c3 100%);
+    --card-bg: linear-gradient(135deg, #ffffff 0%, #f9f5ed 100%);
+    --gold-gradient: linear-gradient(135deg, #7290a3 0%, #4d687b 100%);
+    --gold-hover: linear-gradient(135deg, #819fb2 0%, #59768a 100%);
+    --accent-gold: linear-gradient(135deg, #c8a36c 0%, #9e7845 100%);
+    --cream: #5b4628;        /* สีตัวอักษรหลัก */
+    --muted: #5d7585;        /* ตัวอักษรรอง */
     --font-display: 'Cormorant Garamond', 'Noto Serif Thai', serif;
     --font-body: 'Sarabun', sans-serif;
     --space-1: 0.5rem;
@@ -36,11 +38,12 @@
 
   body {
     margin: 0;
-    background: var(--bg);
-    color: var(--muted);
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--cream);
     font-family: var(--font-body);
     line-height: 1.7;
-    padding-bottom: 90px;
+    padding-bottom: 100px;
   }
 
   h1, h2 {
@@ -108,9 +111,9 @@
     text-align: center;
     padding: 3rem 1.5rem;
     background:
-      linear-gradient(rgba(10,20,15,0.35), rgba(10,20,15,0.55)),
+      linear-gradient(135deg, rgba(18,28,23,0.45) 0%, rgba(8,14,11,0.65) 100%),
       url('789.jpg') center/cover no-repeat,
-      radial-gradient(circle at center, #2d3b2f, #12180f);
+      radial-gradient(circle at center, #2d3b2f 0%, #12180f 100%);
     color: #e9e6e0;
     transition: opacity 0.9s ease, visibility 0.9s ease;
     cursor: pointer;
@@ -141,6 +144,7 @@
     line-height: 1.15;
     color: #e9e6e0;
     margin-top: var(--space-2);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
 
   #envelopeIntro .open-hint {
@@ -160,10 +164,10 @@
   .envelope-body {
     position: absolute;
     inset: 0;
-    background: #f4efe7;
+    background: linear-gradient(160deg, #fbf8f2 0%, #e8decb 100%);
     border-radius: 6px;
-    box-shadow: 0 12px 30px rgba(55, 41, 17, 0.858);
-    border: 1px solid #513f15;
+    box-shadow: 0 15px 35px rgba(35, 25, 10, 0.4);
+    border: 1px solid rgba(180, 150, 105, 0.4);
   }
 
   .envelope-flap {
@@ -172,10 +176,11 @@
     height: 0;
     border-left: calc(min(260px, 70vw) / 2) solid transparent;
     border-right: calc(min(260px, 70vw) / 2) solid transparent;
-    border-top: calc(min(260px, 70vw) * 0.38) solid #d7cdb9;
+    border-top: calc(min(260px, 70vw) * 0.38) solid #d1c4aa;
     transform-origin: top center;
     transition: transform 0.7s ease;
     z-index: 2;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
   }
 
   .envelope.opened .envelope-flap {
@@ -190,8 +195,8 @@
     width: 50px;
     height: 44px;
     border-radius: 50%;
-    background: #f4efe7;
-    border: 1px solid #6f644a;
+    background: linear-gradient(135deg, #ffffff 0%, #f4efe7 100%);
+    border: 1px solid #a89878;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -200,6 +205,7 @@
     color: #6f644a;
     font-size: 1.1rem;
     z-index: 3;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
   }
 
   .envelope.opened {
@@ -250,14 +256,15 @@
     display: block;
     image-rendering: -webkit-optimize-contrast;
     transform: translateZ(0);
+    filter: drop-shadow(0 10px 25px rgba(55, 41, 17, 0.08));
   }
 
   .divider {
-    width: 48px;
-    height: 1px;
-    background: var(--gold);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #7290a3 50%, transparent 100%);
     margin: var(--space-3) auto;
-    opacity: 0.6;
+    opacity: 0.85;
   }
 
   /* ==========================================================
@@ -279,83 +286,99 @@
   .countdown {
     display: flex;
     justify-content: center;
-    gap: 0.8rem;             /* <--- ลด gap ลงเหลือ 0.5rem เพื่อเพิ่มพื้นที่ความกว้างกล่อง */
+    gap: 0.8rem;
     margin-top: var(--space-3);
     flex-wrap: nowrap;
     width: 100%;
-    max-width: 360px;        /* <--- ขยายความกว้างรวมเป็น 440px (ถ้าใช้ 350px กล่องจะแคบมาก) */
+    max-width: 380px;
     margin-left: auto;
     margin-right: auto;
   }
 
   .countdown .box {
-    background: var(--panel);
-    border: 1px solid rgba(242, 164, 9, 0.25);
-    border-radius: 10px;
-    padding: 0.8rem 0.3rem;  /* <--- ลด padding บน-ล่างลงเหลือ 0.6rem เพื่อไม่ให้กล่องสูงเกินไป */
-    aspect-ratio: 3 / 4; /* <--- บังคับให้อัตราส่วนสูงกว่ากว้างเสมอ (ทรงแนวตั้ง) */
+    background: linear-gradient(180deg, #ffffff 0%, #ebdcc7 100%);
+    border: 1px solid rgba(114, 144, 163, 0.25);
+    border-radius: 12px;
+    padding: 0.8rem 0.3rem;
+    aspect-ratio: 3 / 4;
     flex: 1;
     min-width: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* ชิดบน-ชิดล่าง */
-     align-items: center;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(114, 144, 163, 0.12), inset 0 1px 0 rgba(255,255,255,0.8);
   }
 
   .countdown .box strong {
     display: block;
     font-family: var(--font-display);
-    font-size: 2rem;      /* <--- ปรับขนาดตัวเลขลงเล็กน้อยให้พอดีกล่อง */
-    color: var(--gold);
+    font-size: 2.1rem;
+    background: linear-gradient(135deg, #577587 0%, #365061 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     line-height: 1;
     margin-top: 0.2rem;
+    font-weight: 700;
   }
 
   .countdown .box span {
     font-size: 0.75rem;
     color: var(--muted);
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
     margin-bottom: 0.2rem;
+    font-weight: 500;
   }
 
   /* ==========================================================
      6) ดุอาและฮาดิษอวยพร
   ========================================================== */
   .dua-card {
-    background: #ffffff;
+    background: var(--card-bg);
     border-radius: 16px;
-    padding: 1.5rem;
+    padding: 1.6rem 1.4rem;
     margin-top: 1.25rem;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-    border: 1px solid rgba(215, 205, 185, 0.6);
+    box-shadow: 0 8px 25px rgba(114, 144, 163, 0.08);
+    border: 1px solid rgba(180, 160, 130, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dua-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #c8a36c 0%, #7290a3 50%, #c8a36c 100%);
   }
 
   .dua-tag {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    background: var(--panel);
-    color: var(--cream);
+    background: var(--gold-gradient);
+    color: #ffffff;
     font-size: 0.8rem;
-    padding: 0.2rem 0.7rem;
+    padding: 0.25rem 0.85rem;
     border-radius: 999px;
     margin-bottom: 1rem;
     font-weight: 500;
+    box-shadow: 0 3px 10px rgba(114, 144, 163, 0.3);
   }
 
   .arabic-text {
     font-family: 'Amiri', serif;
     font-size: 1.45rem;
     line-height: 2;
-    color: #333333;
+    color: #2b2318;
     margin: 0.5rem 0 1rem 0;
     direction: rtl;
   }
 
   .thai-translation {
     font-size: 0.92rem;
-    color: #555555;
+    color: #4f473c;
     line-height: 1.6;
     margin: 0;
   }
@@ -363,14 +386,24 @@
   /* ==========================================================
      7) เขียนคำอวยพร (GUESTBOOK) & MARQUEE
   ========================================================== */
+  .wish-form-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid rgba(180, 160, 130, 0.3);
+    box-shadow: 0 8px 25px rgba(114, 144, 163, 0.08);
+  }
+
   .marquee-container {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-    padding: 1.2rem 0;
-    background: var(--panel);
+    padding: 1.4rem 0;
+    background: linear-gradient(135deg, #eae1d1 0%, #ded0b9 100%);
     border-radius: 16px;
     overflow: hidden;
+    border: 1px solid rgba(160, 140, 110, 0.25);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
   }
 
   .marquee-wrap {
@@ -408,47 +441,36 @@
   /* ==========================================================
      8) รายละเอียดงาน & การติดต่อ
   ========================================================== */
-  .info-card {
-    background: var(--panel);
-    border-radius: 16px;
+  .info-card, .contact-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f4ede0 100%);
+    border-radius: 20px;
     padding: var(--space-3);
     margin-top: var(--space-2);
+    border: 1px solid rgba(190, 170, 140, 0.35);
+    box-shadow: 0 10px 30px rgba(114, 144, 163, 0.08);
   }
 
   .info-card p { margin: var(--space-1) 0; color: var(--muted); }
   .info-card strong { color: var(--cream); }
 
-  .dresscode-img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 12px;
-    margin-top: 0.5rem;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .map-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: var(--gold);
-    color: var(--bg);
-    padding: 0.75rem 1.5rem;
+    background: var(--gold-gradient);
+    color: #ffffff;
+    padding: 0.85rem 1.75rem;
     border-radius: 999px;
     text-decoration: none;
     font-weight: 500;
     margin-top: 1rem;
-    transition: filter 0.2s ease;
+    box-shadow: 0 6px 18px rgba(114, 144, 163, 0.35);
+    transition: all 0.3s ease;
   }
-  .map-btn:hover { filter: brightness(1.1); }
-
-  .contact-card {
-    background: var(--panel);
-    border-radius: 16px;
-    padding: var(--space-3);
-    margin-top: var(--space-2);
+  .map-btn:hover {
+    background: var(--gold-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(114, 144, 163, 0.45);
   }
 
   .contact-grid {
@@ -476,38 +498,50 @@
   .contact-item a {
     color: var(--cream);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
   }
   .contact-item a:hover { text-decoration: underline; }
 
   /* ==========================================================
      9) ฟอร์มคำอวยพร
   ========================================================== */
-  form { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-2); }
+  form { display: flex; flex-direction: column; gap: var(--space-2); }
 
   input, textarea {
-    background: var(--bg);
-    border: 1px solid rgba(201,160,99,0.3);
+    background: #ffffff;
+    border: 1px solid rgba(180, 150, 105, 0.4);
     color: var(--cream);
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
     font-family: var(--font-body);
     font-size: 1rem;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    transition: border-color 0.3s ease;
   }
 
-  button {
-    background: var(--gold);
-    color: var(--bg);
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: #7290a3;
+  }
+
+  button[type="submit"] {
+    background: var(--gold-gradient);
+    color: #ffffff;
     border: none;
-    padding: 0.9rem 1.5rem;
-    border-radius: 8px;
+    padding: 0.95rem 1.5rem;
+    border-radius: 10px;
     font-family: var(--font-body);
     font-weight: 500;
     font-size: 1rem;
     cursor: pointer;
-    transition: filter 0.2s ease;
+    box-shadow: 0 6px 18px rgba(114, 144, 163, 0.35);
+    transition: all 0.3s ease;
   }
-  button:hover { filter: brightness(1.1); }
+  button[type="submit"]:hover {
+    background: var(--gold-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(114, 144, 163, 0.45);
+  }
 
   /* ==========================================================
      10) ปุ่มเล่นเพลง
@@ -516,18 +550,24 @@
     position: fixed;
     top: 1.25rem;
     right: 1.25rem;
-    width: 44px;
-    height: 44px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    background: var(--panel);
-    border: 1px solid rgba(201,160,99,0.3);
-    color: var(--gold);
+    background: linear-gradient(145deg, #ffffff 0%, #e3d7c3 100%);
+    border: 1px solid rgba(114, 144, 163, 0.4);
+    color: #516d80;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 50;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    transition: transform 0.2s ease, background 0.3s ease;
+  }
+
+  .sound-btn:hover {
+    transform: scale(1.08);
   }
 
   /* ==========================================================
@@ -539,18 +579,18 @@
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - 1.5rem);
-    max-width: 400px;
-    background: rgba(215, 205, 185, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(114, 144, 163, 0.3);
+    max-width: 420px;
+    background: linear-gradient(135deg, rgba(245, 240, 230, 0.92) 0%, rgba(225, 215, 198, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 999px;
     display: flex;
-    justify-space-around;
+    justify-content: space-around;
     align-items: center;
-    padding: 0.2rem 0.3rem;
+    padding: 0.3rem 0.4rem;
     z-index: 80;
-    box-shadow: 0 10px 25px rgba(55, 41, 17, 0.15);
+    box-shadow: 0 12px 32px rgba(55, 41, 17, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.8);
   }
 
   .bottom-nav a {
@@ -562,21 +602,21 @@
     text-decoration: none;
     font-size: 0.65rem;
     font-weight: 500;
-    padding: 0.25rem 0.3rem;
-    border-radius: 12px;
+    padding: 0.3rem 0.4rem;
+    border-radius: 14px;
     transition: background 0.25s ease, color 0.25s ease;
     flex: 1;
     text-align: center;
   }
 
   .bottom-nav a:hover, .bottom-nav a:active {
-    background: var(--bg);
-    color: var(--cream);
+    background: rgba(255, 255, 255, 0.6);
+    color: #2b2318;
   }
 
   .bottom-nav svg {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     fill: currentColor;
   }
 
@@ -632,7 +672,7 @@
 
 <!-- ========== COUNTDOWN ========== -->
 <section class="reveal">
-  <p style="color:var(--blush); letter-spacing:0.1em; font-size:0.85rem;">นับถอยหลัง</p>
+  <p style="color:var(--muted); letter-spacing:0.12em; font-size:0.85rem; font-weight: 600;">นับถอยหลัง</p>
   <div class="divider"></div>
   <div class="countdown" id="countdown">
     <div class="box"><strong id="cd-days">00</strong><span>วัน</span></div>
@@ -705,14 +745,14 @@
     <p><strong>เวลา:</strong> 10:00 - 18:00 น.</p>
     <p><strong>สถานที่:</strong> บ้านปากจด, สงขลา (บ้านเจ้าบ่าว)</p>
     
-    <!-- จุดที่แก้ไข: วงกลมสีธีมการแต่งกาย 4 สี -->
+    <!-- วงกลมสีธีมการแต่งกาย 4 สี -->
     <div style="margin-top: 1.25rem;">
       <strong style="color: var(--cream); display: block; margin-bottom: 0.75rem;">ธีมการแต่งกาย:</strong>
       <div style="display: flex; justify-content: center; align-items: center; gap: 0.75rem;">
-        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #603314; display: inline-block; box-shadow: 0 2px 6px rgba(0,0,0,0.15); border: 2px solid #603314;"></span>
-        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #758925; display: inline-block; box-shadow: 0 2px 6px rgba(0,0,0,0.15); border: 2px solid #758925;"></span>
-        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #b5c49a; display: inline-block; box-shadow: 0 2px 6px rgba(0,0,0,0.15); border: 2px solid #b5c49a;"></span>
-        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #dfa0aa; display: inline-block; box-shadow: 0 2px 6px rgba(0,0,0,0.15); border: 2px solid #dfa0aa;"></span>
+        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #603314; display: inline-block; box-shadow: 0 3px 8px rgba(0,0,0,0.15); border: 2px solid #ffffff;"></span>
+        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #758925; display: inline-block; box-shadow: 0 3px 8px rgba(0,0,0,0.15); border: 2px solid #ffffff;"></span>
+        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #b5c49a; display: inline-block; box-shadow: 0 3px 8px rgba(0,0,0,0.15); border: 2px solid #ffffff;"></span>
+        <span style="width: 38px; height: 38px; border-radius: 50%; background-color: #dfa0aa; display: inline-block; box-shadow: 0 3px 8px rgba(0,0,0,0.15); border: 2px solid #ffffff;"></span>
       </div>
     </div>
     
@@ -848,7 +888,7 @@
     const diff = weddingDate - now;
 
     if (diff <= 0) {
-      document.getElementById('countdown').innerHTML = '<p style="color:var(--gold); font-family:var(--font-display); font-size:1.5rem;">ถึงวันแต่งงานแล้ว! 🎉</p>';
+      document.getElementById('countdown').innerHTML = '<p style="color:var(--cream); font-family:var(--font-display); font-size:1.5rem;">ถึงวันแต่งงานแล้ว! 🎉</p>';
       clearInterval(timer);
       return;
     }
