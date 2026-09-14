@@ -683,7 +683,7 @@
 
 <!-- ปุ่มเล่น/หยุดเพลง -->
 <button class="sound-btn" id="soundBtn" aria-label="เปิด/ปิดเพลง">♪</button>
-<audio id="bgm" src="wedding-song.mp3" loop></audio>
+<audio id="bgm" src="Baby Shark.mp3" loop></audio>
 
 <!-- ========== 1) ส่วนแสดงรูปภาพการ์ดแต่งงาน (รูปที่ 1 และ รูปที่ 2) ========== -->
 <section class="reveal card-preview-section" id="wedding-card-section">
@@ -892,6 +892,7 @@
 
     // สั่งให้เพลงเล่นอัตโนมัติพร้อมปรับเสียง 50% และหมุนปุ่ม
     bgm.volume = 0.1;
+    bgm.playbackRate = 1.0; // ปรับเพลงให้ช้าลงนิดนึง (ค่าปกติคือ 1.0)
     bgm.play().then(() => {
       isPlaying = true;
       soundBtn.textContent = '❚❚';
@@ -1042,6 +1043,7 @@
       soundBtn.classList.remove('playing');
     } else {
       bgm.volume = 0.1;
+      bgm.playbackRate = 1.0; // ปรับเพลงให้ช้าลงนิดนึง (ค่าปกติคือ 1.0)
       bgm.play();
       soundBtn.textContent = '❚❚';
       soundBtn.classList.add('playing');
