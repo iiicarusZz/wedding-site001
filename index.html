@@ -411,20 +411,20 @@
   .marquee-wrap {
     overflow: hidden;
     width: 100%;
-    height: 32px; /* กำหนดความสูงตายตัว เช่น 30px - 36px ตามความเหมาะสม */
+    height: 32px;
     background: rgba(245, 238, 226, 0.6);
     backdrop-filter: blur(4px);
     border-top: 1px solid rgba(180, 160, 130, 0.35);
     border-bottom: 1px solid rgba(180, 160, 130, 0.35);
-    padding: 0; /* เอา padding ออกเพื่อให้ความสูงถูกควบคุมด้วย height ด้านบน */
+    padding: 0;
     display: flex;
-    align-items: center; /* จัดตัวหนังสือให้อยู่กึ่งกลางแนวตั้งเสมอ */
+    align-items: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   }
 
   .marquee-track {
     display: flex;
-    height: 100%; /* ให้แทร็กวิ่งเต็มความสูงของแถบ */
+    height: 100%;
     width: max-content;
     animation: scroll-right 25s linear infinite;
     align-items: center;
@@ -441,19 +441,18 @@
     100% { transform: translateX(0%); }
   }
 
-  /* ช่องการ์ดคำอวยพรแต่ละอัน (เอาพื้นหลังและกรอบออก) */
-    .wish {
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      padding: 0.35rem 1.1rem;
-      margin: 0 1.2rem;
-      white-space: nowrap;
-      font-size: 0.9rem;
-      color: var(--cream);
-      font-weight: 500;
-      box-shadow: none;
-    }
+  .wish {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0.35rem 1.1rem;
+    margin: 0 1.2rem;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    color: var(--cream);
+    font-weight: 500;
+    box-shadow: none;
+  }
 
   /* ==========================================================
      8) รายละเอียดงาน & การติดต่อ
@@ -587,13 +586,11 @@
     transform: scale(1.08);
   }
 
-  /* อนิเมชันหมุน */
   @keyframes spinRecord {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
 
-  /* เมื่อกำลังเล่นเพลง ให้เพิ่มคลาสนี้เพื่อให้ปุ่มหมุน */
   .sound-btn.playing {
     animation: spinRecord 3s linear infinite;
   }
@@ -683,7 +680,7 @@
 
 <!-- ปุ่มเล่น/หยุดเพลง -->
 <button class="sound-btn" id="soundBtn" aria-label="เปิด/ปิดเพลง">♪</button>
-<audio id="bgm" src="Baby Shark.mp3" loop></audio>
+<audio id="bgm" src="wedding-song.mp3" loop></audio>
 
 <!-- ========== 1) ส่วนแสดงรูปภาพการ์ดแต่งงาน (รูปที่ 1 และ รูปที่ 2) ========== -->
 <section class="reveal card-preview-section" id="wedding-card-section">
@@ -820,8 +817,7 @@
 
 <footer>
   <h2 style="font-size:1.3rem;"> بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا </h2>
-   Zainun &amp; Sadanan · 30.10.2026
-
+  Zainun &amp; Sadanan · 30.10.2026
 </footer>
 
 <!-- ========== BOTTOM NAVIGATION BAR ========== -->
@@ -861,11 +857,11 @@
     const startLeft = Math.random() * 100;
     flower.style.left = `${startLeft}%`;
 
-    const size = Math.random() * 55 + 20;   // สุ่มขนาดให้มีทั้งดอกเล็กและดอกใหญ่ (ขนาดตั้งแต่ 20px ถึง 75px)
+    const size = Math.random() * 55 + 20;
     flower.style.width = `${size}px`;
     flower.style.height = 'auto';
 
-    const duration = Math.random() * 6 + (size > 50 ? 9 : 6); // ดอกใหญ่ให้ลอยช้าลงเล็กน้อยเพื่อให้ดูสมจริง
+    const duration = Math.random() * 6 + (size > 50 ? 9 : 6);
     flower.style.animationDuration = `${duration}s`;
 
     flowerContainer.appendChild(flower);
@@ -884,15 +880,14 @@
   const introScreen = document.getElementById('envelopeIntro');
   const bgm = document.getElementById('bgm');
   const soundBtn = document.getElementById('soundBtn');
-  let isPlaying = false; // ย้ายตัวแปรนี้มาไว้ด้านบนสุดเพื่อให้ใช้งานร่วมกันได้
+  let isPlaying = false;
 
   introScreen.addEventListener('click', () => {
     if (envelope.classList.contains('opened')) return;
     envelope.classList.add('opened');
 
-    // สั่งให้เพลงเล่นอัตโนมัติพร้อมปรับเสียง 50% และหมุนปุ่ม
     bgm.volume = 0.1;
-    bgm.playbackRate = 1.0; // ปรับเพลงให้ช้าลงนิดนึง (ค่าปกติคือ 1.0)
+    bgm.playbackRate = 1.0;
     bgm.play().then(() => {
       isPlaying = true;
       soundBtn.textContent = '❚❚';
@@ -952,11 +947,12 @@
   const timer = setInterval(updateCountdown, 1000);
 
   /* ==========================================================
-     D) MARQUEE 3 ROWS WITH GOOGLE SHEETS INTEGRATION
+     D) MARQUEE 3 ROWS WITH GOOGLE SHEETS INTEGRATION & REAL-TIME
   ========================================================== */
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTlqRewP52vFEwgBThJOnQaro8UYK2yNmdJI7OinN9RCSd55o1QKrQQ76Q5zWY6Yg/exec";
 
   const tracks = document.querySelectorAll('.marquee-track');
+  const displayedWishes = new Set();
 
   function addWishToRandomTrack(name, msg) {
     const wishEl = document.createElement('div');
@@ -967,30 +963,29 @@
     randomTrack.appendChild(wishEl);
   }
 
-  async function loadWishesFromSheets() {
-    tracks.forEach(track => track.innerHTML = '');
-
+  async function fetchAndSyncWishes() {
     if (!GOOGLE_SCRIPT_URL) return;
-
     try {
       const response = await fetch(GOOGLE_SCRIPT_URL);
       const wishes = await response.json();
 
       if (wishes && wishes.length > 0) {
         wishes.forEach(item => {
-          addWishToRandomTrack(item.name, item.message);
-        });
-
-        tracks.forEach(track => {
-          track.innerHTML += track.innerHTML;
+          const wishKey = `${item.name}-${item.message}`;
+          if (!displayedWishes.has(wishKey)) {
+            displayedWishes.add(wishKey);
+            addWishToRandomTrack(item.name, item.message);
+          }
         });
       }
     } catch (err) {
-      console.error("เกิดข้อผิดพลาดในการโหลดคำอวยพร:", err);
+      console.error("Sync error:", err);
     }
   }
 
-  loadWishesFromSheets();
+  // เริ่มต้นดึงข้อมูลทันที และเช็กข้อมูลใหม่ทุกๆ 3 วินาที
+  fetchAndSyncWishes();
+  setInterval(fetchAndSyncWishes, 3000);
 
   const wishForm = document.getElementById('wishForm');
   const submitBtn = wishForm.querySelector('button[type="submit"]');
@@ -1003,25 +998,23 @@
 
     if (!name || !msg) return;
 
-    // เคลียร์ฟอร์มและเปลี่ยนข้อความปุ่มทันทีแบบเรียลไทม์
     const originalText = submitBtn.textContent;
-    /*submitBtn.textContent = 'ขอบคุณสำหรับคำอวยพรคู่บ่าวสาวครับ 🤍';*/
-    submitBtn.textContent = 'ถ้าจะพิมพ์งี้ ก็ไม่ต้องมาอวยครับ 🤍';
+    submitBtn.textContent = 'ส่งคำอวยพรเรียบร้อย! 🤍';
     submitBtn.disabled = true;
     wishForm.reset();
 
-    // ใช้ requestAnimationFrame เพื่อดันงานไปเรนเดอร์ต่อทันทีโดยไม่ติดขัด
+    const wishKey = `${name}-${msg}`;
+    displayedWishes.add(wishKey);
+
     requestAnimationFrame(() => {
       addWishToRandomTrack(name, msg);
     });
 
-    // คืนค่าปุ่มกลับมาปกติหลังผ่านไป 1.5 วินาที
     setTimeout(() => {
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
     }, 2500);
 
-    // ส่งข้อมูลไปบันทึก Google Sheets แบบ Background ชนิดไม่รอผลลัพธ์
     if (GOOGLE_SCRIPT_URL) {
       navigator.sendBeacon ? 
         navigator.sendBeacon(GOOGLE_SCRIPT_URL, JSON.stringify({ name: name, message: msg })) :
@@ -1032,39 +1025,7 @@
           body: JSON.stringify({ name: name, message: msg })
         }).catch(() => {});
     }
-    });
-
-    // เก็บรายชื่อข้อความที่แสดงไปแล้ว เพื่อป้องกันไม่ให้ข้อความเก่าเด้งซ้ำซ้อน
-    const displayedWishes = new Set();
-
-    // ฟังก์ชันดึงข้อมูลคำอวยพรจาก Google Sheets แบบ Real-time
-    async function fetchAndSyncWishes() {
-      if (!GOOGLE_SCRIPT_URL) return;
-      try {
-        const response = await fetch(GOOGLE_SCRIPT_URL);
-        const wishes = await response.json();
-        
-        wishes.forEach(item => {
-          // สร้างกุญแจ (Key) เอกลักษณ์จากชื่อและข้อความ
-          const wishKey = `${item.name}-${item.message}`;
-        
-          // ถ้ายังไม่เคยแสดงบนหน้าจอ ให้จับยัดใส่แถบวิ่งทันที
-          if (!displayedWishes.has(wishKey)) {
-            displayedWishes.add(wishKey);
-            // เรียกฟังก์ชันเพิ่มลงแถบวิ่งที่มีอยู่แล้วในเว็บของคุณ
-            if (typeof addWishToRandomTrack === 'function') {
-              addWishToRandomTrack(item.name, item.message);
-            } 
-          }
-        });
-      } catch (err) {
-        console.error("Sync error:", err);
-      }
-  }
-
-  // เริ่มต้นดึงข้อมูลทันที และเช็กข้อมูลใหม่ทุกๆ 3 วินาที
-  fetchAndSyncWishes();
-  setInterval(fetchAndSyncWishes, 3000);
+  });
 
   /* ==========================================================
      E) ปุ่มเล่น/หยุดเพลง
@@ -1072,7 +1033,7 @@
   soundBtn.addEventListener('click', () => {
     const musicSrc = bgm.getAttribute('src');
     if (!musicSrc || musicSrc.trim() === '') {
-      alert('wedding-song');
+      alert('ยังไม่ได้ใส่ไฟล์เพลง');
       return;
     }
     
@@ -1082,7 +1043,7 @@
       soundBtn.classList.remove('playing');
     } else {
       bgm.volume = 0.1;
-      bgm.playbackRate = 1.0; // ปรับเพลงให้ช้าลงนิดนึง (ค่าปกติคือ 1.0)
+      bgm.playbackRate = 1.0;
       bgm.play();
       soundBtn.textContent = '❚❚';
       soundBtn.classList.add('playing');
