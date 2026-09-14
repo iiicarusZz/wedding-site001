@@ -44,6 +44,7 @@
     font-family: var(--font-body);
     line-height: 1.7;
     padding-bottom: 100px;
+    overflow-x: hidden;
   }
 
   h1, h2 {
@@ -384,7 +385,7 @@
   }
 
   /* ==========================================================
-     7) เขียนคำอวยพร (GUESTBOOK) & MARQUEE
+     7) เขียนคำอวยพร (GUESTBOOK) & MARQUEE (FULLSCREEN SLIDE)
   ========================================================== */
   .wish-form-card {
     background: var(--card-bg);
@@ -394,27 +395,35 @@
     box-shadow: 0 8px 25px rgba(114, 144, 163, 0.08);
   }
 
-  .marquee-container {
+  /* คอนเทนเนอร์รวม 3 แถบสไลด์แบบไร้กรอบใหญ่ */
+  .marquee-fullscreen-group {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
-    padding: 1.4rem 0;
-    background: linear-gradient(135deg, #eae1d1 0%, #ded0b9 100%);
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(160, 140, 110, 0.25);
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
+    gap: 0.75rem;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 0;
   }
 
+  /* แต่ละแถบกรอบแนวยาวเต็มจอ */
   .marquee-wrap {
     overflow: hidden;
     width: 100%;
+    background: rgba(245, 238, 226, 0.6);
+    backdrop-filter: blur(4px);
+    border-top: 1px solid rgba(180, 160, 130, 0.35);
+    border-bottom: 1px solid rgba(180, 160, 130, 0.35);
+    padding: 0.6rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   }
 
   .marquee-track {
     display: flex;
     width: max-content;
     animation: scroll-right 25s linear infinite;
+    align-items: center;
   }
 
   .track-1 { animation-duration: 22s; }
@@ -428,15 +437,19 @@
     100% { transform: translateX(0%); }
   }
 
-  .wish {
-    background: none;
-    border: none;
-    padding: 0 1.2rem;
-    white-space: nowrap;
-    font-size: 0.95rem;
-    color: var(--cream);
-    font-weight: 500;
-  }
+  /* ช่องการ์ดคำอวยพรแต่ละอัน (เอาพื้นหลังและกรอบออก) */
+    .wish {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0.35rem 1.1rem;
+      margin: 0 1.2rem;
+      white-space: nowrap;
+      font-size: 0.95rem;
+      color: var(--cream);
+      font-weight: 500;
+      box-shadow: none;
+    }
 
   /* ==========================================================
      8) รายละเอียดงาน & การติดต่อ
@@ -725,10 +738,10 @@
     </form>
   </div>
 
-  <!-- Marquee แสดงคำอวยพรวิ่ง -->
+  <!-- Marquee แสดงคำอวยพรวิ่งแบบ 3 แถบสไลด์เต็มหน้าจอ -->
   <div style="margin-top: 2rem;">
     <h3 style="font-size:1.2rem; color:var(--cream); font-family:var(--font-display); margin-bottom:1rem;">คำอวยพรจากคนที่รัก</h3>
-    <div class="marquee-container">
+    <div class="marquee-fullscreen-group">
       <div class="marquee-wrap"><div class="marquee-track track-1"></div></div>
       <div class="marquee-wrap"><div class="marquee-track track-2"></div></div>
       <div class="marquee-wrap"><div class="marquee-track track-3"></div></div>
@@ -831,11 +844,11 @@
     const startLeft = Math.random() * 100;
     flower.style.left = `${startLeft}%`;
 
-    const size = Math.random() * 20 + 15;
+    const size = Math.random() * 55 + 20;   // สุ่มขนาดให้มีทั้งดอกเล็กและดอกใหญ่ (ขนาดตั้งแต่ 20px ถึง 75px)
     flower.style.width = `${size}px`;
     flower.style.height = 'auto';
 
-    const duration = Math.random() * 6 + 6;
+    const duration = Math.random() * 6 + (size > 50 ? 9 : 6); // ดอกใหญ่ให้ลอยช้าลงเล็กน้อยเพื่อให้ดูสมจริง
     flower.style.animationDuration = `${duration}s`;
 
     flowerContainer.appendChild(flower);
