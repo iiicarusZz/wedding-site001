@@ -438,7 +438,7 @@
 
   @keyframes scroll-right {
     0% { transform: translateX(-50%); }
-    100% { transform: translateX(0%); }
+    100% { transform: translateX(100%); }
   }
 
   .wish {
@@ -955,13 +955,20 @@
   const displayedWishes = new Set();
 
   function addWishToRandomTrack(name, msg) {
-    const wishEl = document.createElement('div');
-    wishEl.className = 'wish';
-    wishEl.textContent = `${msg} — ${name}`;
+  const wishEl = document.createElement('div');
+  wishEl.className = 'wish';
+  wishEl.textContent = `${msg} — ${name}`;
 
-    const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
-    randomTrack.appendChild(wishEl);
-  }
+  // หาแถบที่มีจำนวนข้อความน้อยที่สุดเพื่อกระจายให้เท่ากัน
+  let targetTrack = tracks[0];
+  tracks.forEach(track => {
+    if (track.children.length < targetTrack.children.length) {
+      targetTrack = track;
+    }
+  });
+
+  targetTrack.appendChild(wishEl);
+}
 
   async function fetchAndSyncWishes() {
     if (!GOOGLE_SCRIPT_URL) return;
