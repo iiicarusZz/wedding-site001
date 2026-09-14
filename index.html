@@ -887,7 +887,7 @@
     envelope.classList.add('opened');
 
     bgm.volume = 0.1;
-    bgm.playbackRate = 1.0;
+    bgm.playbackRate = 0.87;
     bgm.play().then(() => {
       isPlaying = true;
       soundBtn.textContent = '❚❚';
@@ -1043,7 +1043,7 @@
       soundBtn.classList.remove('playing');
     } else {
       bgm.volume = 0.1;
-      bgm.playbackRate = 1.0;
+      bgm.playbackRate = 0.87;
       bgm.play();
       soundBtn.textContent = '❚❚';
       soundBtn.classList.add('playing');
