@@ -57,6 +57,42 @@
   }
 
   /* ==========================================================
+     BACKGROUND FLOATING FLOWERS
+  ========================================================== */
+  #flowerContainer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .floating-flower {
+    position: absolute;
+    bottom: -60px;
+    pointer-events: none;
+    user-select: none;
+    animation: floatUp linear forwards;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) rotate(0deg) translateX(0);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.85;
+    }
+    85% {
+      opacity: 0.85;
+    }
+    100% {
+      transform: translateY(-110vh) rotate(360deg) translateX(60px);
+      opacity: 0;
+    }
+  }
+
+  /* ==========================================================
      2) ENVELOPE INTRO
   ========================================================== */
   body.intro-active { overflow: hidden; }
@@ -180,22 +216,21 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     width: 100%;
-    max-width: 1000px; /* ขยายรองรับรูปที่ 1 บนคอม */
+    max-width: 1000px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
 
-  /* กำหนดขนาดแยกเฉพาะบนหน้าจอคอมพิวเตอร์ (ตั้งแต่ 768px ขึ้นไป) */
   @media (min-width: 768px) {
     #cardImage1 {
-      max-width: 950px; /* ความกว้างรูปที่ 1 บนคอม */
+      max-width: 950px;
       margin: 0 auto;
     }
 
     #cardImage2 {
-      max-width: 520px; /* ความกว้างรูปที่ 2 บนคอม */
+      max-width: 520px;
       margin: 0 auto;
     }
   }
@@ -391,33 +426,41 @@
   }
   .map-btn:hover { filter: brightness(1.1); }
 
-  .contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: var(--space-2);
-    margin-top: var(--space-2);
-  }
-
   .contact-card {
     background: var(--panel);
     border-radius: 16px;
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .contact-item {
     text-align: center;
   }
 
-  .contact-card strong {
+  .contact-item strong {
     color: var(--cream);
     display: block;
     font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
   }
 
-  .contact-card a {
+  .contact-item p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .contact-item a {
     color: var(--cream);
     text-decoration: none;
     font-weight: 500;
   }
-  .contact-card a:hover { text-decoration: underline; }
+  .contact-item a:hover { text-decoration: underline; }
 
   /* ==========================================================
      9) ฟอร์มคำอวยพร
@@ -529,6 +572,9 @@
 </head>
 <body class="intro-active">
 
+<!-- กล่องแสดงดอกไม้ลอยแบคกราว -->
+<div id="flowerContainer"></div>
+
 <!-- ==========================================================
      หน้าปกซอง
 ========================================================== -->
@@ -637,13 +683,13 @@
   <h2 style="font-size:1.8rem;">รายละเอียดงาน</h2>
   <div class="divider"></div>
   <div class="info-card">
-    <p><strong>วันที่:</strong> 30 ตุลาคม 2569</p>
-    <p><strong>เวลา:</strong> 10:00 - 14:00 น.</p>
-    <p><strong>สถานที่:</strong> บ้านปากจด, สงขลา</p>
+    <p><strong>วันที่:</strong> 30 ตุลาคม 2569 (ตรงกับวันศุกร์)</p>
+    <p><strong>เวลา:</strong> 10:00 - 18:00 น.</p>
+    <p><strong>สถานที่:</strong> บ้านปากจด, สงขลา (บ้านเจ้าบ่าว)</p>
     <p><strong>การแต่งกาย:</strong> ชุดสุภาพโทนสีทอง/เขียวเข้ม</p>
     
     <div style="margin-top: 1.25rem;">
-      <a href="https://maps.google.com/?q=บ้านปากจด+สงขลา" target="_blank" rel="noopener" class="map-btn">
+      <a href="https://maps.app.goo.gl/Fk1ke2xK3sx3zTk46" target="_blank" rel="noopener" class="map-btn">
         📍 ดูสถานที่ใน Google Maps
       </a>
     </div>
@@ -654,28 +700,30 @@
 <section class="reveal" id="contact-section">
   <h2 style="font-size:1.8rem;">ช่องทางการติดต่อ</h2>
   <div class="divider"></div>
-  <div class="contact-grid">
-    <div class="contact-card">
-      <strong>แม่เจ้าบ่าว</strong>
-      <p>โทร: <a href="tel:0836539718">083-6539718</a></p>
-    </div>
-    <div class="contact-card">
-      <strong>เจ้าบ่าว</strong>
-      <p>โทร: <a href="tel:0928493327">092-8493327</a></p>
-    </div>
-    <div class="contact-card">
-      <strong>แม่เจ้าสาว</strong>
-      <p>โทร: <a href="tel:0898739628">089-8739628</a></p>
-    </div>
-    <div class="contact-card">
-      <strong>เจ้าสาว</strong>
-      <p>โทร: <a href="tel:0617527143">061-7527143</a></p>
+  <div class="contact-card">
+    <div class="contact-grid">
+      <div class="contact-item">
+        <strong>แม่เจ้าบ่าว</strong>
+        <p>โทร: <a href="tel:0836539718">083-6539718</a></p>
+      </div>
+      <div class="contact-item">
+        <strong>เจ้าบ่าว</strong>
+        <p>โทร: <a href="tel:0928493327">092-8493327</a></p>
+      </div>
+      <div class="contact-item">
+        <strong>แม่เจ้าสาว</strong>
+        <p>โทร: <a href="tel:0898739628">089-8739628</a></p>
+      </div>
+      <div class="contact-item">
+        <strong>เจ้าสาว</strong>
+        <p>โทร: <a href="tel:0617527143">061-7527143</a></p>
+      </div>
     </div>
   </div>
 </section>
 
 <footer>
-  Zainun<br>&amp; Sadanan · 30.10.2026
+  Zainun &amp; Sadanan · 30.10.2026
 </footer>
 
 <!-- ========== BOTTOM NAVIGATION BAR ========== -->
@@ -700,7 +748,39 @@
 
 <script>
   /* ==========================================================
-     0) ENVELOPE INTRO (คลิกจุดไหนบนหน้าจอก็ได้เพื่อเปิดการ์ด)
+     BACKGROUND FLOATING FLOWERS
+  ========================================================== */
+  const flowerContainer = document.getElementById('flowerContainer');
+  const FLOWER_IMAGE_SRC = '224466.PNG'; // 👈 เปลี่ยนชื่อไฟล์รูปดอกไม้ของคุณตรงนี้
+
+  function createFlower() {
+    if (!flowerContainer) return;
+
+    const flower = document.createElement('img');
+    flower.src = FLOWER_IMAGE_SRC;
+    flower.className = 'floating-flower';
+
+    const startLeft = Math.random() * 100;
+    flower.style.left = `${startLeft}%`;
+
+    const size = Math.random() * 20 + 15;
+    flower.style.width = `${size}px`;
+    flower.style.height = 'auto';
+
+    const duration = Math.random() * 6 + 6;
+    flower.style.animationDuration = `${duration}s`;
+
+    flowerContainer.appendChild(flower);
+
+    setTimeout(() => {
+      flower.remove();
+    }, duration * 1000);
+  }
+
+  setInterval(createFlower, 700);
+
+  /* ==========================================================
+     0) ENVELOPE INTRO
   ========================================================== */
   const envelope = document.getElementById('envelope');
   const introScreen = document.getElementById('envelopeIntro');
