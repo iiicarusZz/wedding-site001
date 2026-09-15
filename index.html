@@ -43,8 +43,11 @@
     color: var(--cream);
     font-family: var(--font-body);
     line-height: 1.7;
-    padding-bottom: 100px;
+    padding-bottom: 120px;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
   h1, h2 {
@@ -58,6 +61,7 @@
     margin: 0 auto;
     padding: var(--space-4) var(--space-3);
     text-align: center;
+    width: 100%;
   }
 
   /* ==========================================================
@@ -97,7 +101,7 @@
   }
 
   /* ==========================================================
-     2) ENVELOPE INTRO (แก้ไขโครงสร้าง Layer ไม่ให้ซ้อนทับชนกัน)
+     2) ENVELOPE INTRO
   ========================================================== */
   body.intro-active { overflow: hidden; }
 
@@ -178,7 +182,6 @@
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
   }
 
-  /* แผ่นรองซองจดหมายด้านใน */
   .envelope-inner {
     position: absolute;
     inset: 0;
@@ -188,7 +191,6 @@
     z-index: 1;
   }
 
-  /* แผ่นการ์ดด้านในที่สไลด์ขึ้น */
   .envelope-card {
     position: absolute;
     bottom: 8px;
@@ -203,7 +205,6 @@
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    /* เลื่อนขึ้นสมูท ช้ากำลังดี */
     transition: transform 1.1s cubic-bezier(0.25, 1, 0.5, 1) 0.4s;
     z-index: 2;
     border: 1px solid #e2d7c3;
@@ -223,7 +224,6 @@
     text-transform: uppercase;
   }
 
-  /* พับซ้าย-ขวา-ล่าง (อยู่ด้านหน้าการ์ดเสมอ เพื่อปิดโคนซอง) */
   .envelope-flap-left {
     position: absolute;
     top: 0; left: 0; bottom: 0;
@@ -258,7 +258,6 @@
     pointer-events: none;
   }
 
-  /* ฝาปิดด้านบน (Top Flap) */
   .envelope-flap-top {
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -273,7 +272,6 @@
     filter: drop-shadow(0 3px 5px rgba(0,0,0,0.15));
   }
 
-  /* ตราประทับครั่ง (Wax Seal) */
   .envelope-seal {
     position: absolute;
     top: 50%;
@@ -298,10 +296,9 @@
     transition: opacity 0.4s ease, transform 0.4s ease;
   }
 
-  /* สภาวะเมื่อเปิดซอง (เปิดฝาบนเลื่อนลงหลังการ์ด และเลื่อนการ์ดขึ้นอย่างสวยงาม) */
   .envelope.opened .envelope-flap-top {
     transform: rotateX(180deg);
-    z-index: 1; /* ส่งฝาบนไปไว้ข้างหลังสุดเมื่อเปิดแล้ว */
+    z-index: 1;
   }
 
   .envelope.opened .envelope-seal {
@@ -310,7 +307,7 @@
   }
 
   .envelope.opened .envelope-card {
-    transform: translateY(-65px); /* ระยะที่การ์ดโผล่ขึ้นมาให้พอดีสวยงาม */
+    transform: translateY(-65px);
   }
 
   /* ==========================================================
@@ -381,7 +378,7 @@
   }
 
   /* ==========================================================
-     5) COUNTDOWN
+     5) COUNTDOWN (ปรับปรุงฟอนต์ให้อ่านง่ายและสวยงาม)
   ========================================================== */
   .countdown {
     display: flex;
@@ -399,7 +396,7 @@
     background: linear-gradient(180deg, #ffffff 0%, #ebdcc7 100%);
     border: 1px solid rgba(114, 144, 163, 0.25);
     border-radius: 12px;
-    padding: 0.8rem 0.3rem;
+    padding: 0.8rem 0.6rem; /* เพิ่ม padding ซ้าย-ขวาเป็น 0.6rem เพื่อไม่ให้ตัวเลขชิดขอบเกินไป */
     aspect-ratio: 3 / 4;
     flex: 1;
     min-width: 0;
@@ -408,19 +405,34 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 8px 20px rgba(114, 144, 163, 0.12), inset 0 1px 0 rgba(255,255,255,0.8);
+    overflow: visible; /* มั่นใจว่าหางฟอนต์จะไม่โดนตัด */
+  }
+  .countdown .box strong {
+  display: inline-block; /* เปลี่ยนจาก block เป็น inline-block เพื่อให้คำนวนขนาดพื้นที่ฟอนต์ได้สมบูรณ์ */
+  font-family: 'Cormorant Garamond', cursive;
+  font-size: 2.8rem;
+  background: linear-gradient(135deg, #577587 0%, #365061 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2; /* เพิ่ม line-height เล็กน้อยเพื่อไม่ให้โดนตัดหัว/ท้าย */
+  margin-top: 0.1rem;
+  font-weight: 400;
+  padding-right: 0.25em; /* เพิ่มพื้นที่ด้านขวา ป้องกันปลายหางฟอนต์เอียงโดนตัด */
+  margin-right: -0.25em; /* ชดเชยระยะจัดกึ่งกลางให้ยังคงอยู่ตรงกลางพอดี */
   }
 
-  .countdown .box strong {
+/*.countdown .box strong {
     display: block;
-    font-family: var(--font-display);
-    font-size: 2.1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.3rem;
     background: linear-gradient(135deg, #577587 0%, #365061 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     line-height: 1;
     margin-top: 0.2rem;
     font-weight: 700;
-  }
+    letter-spacing: 0.02em;
+  }*/
 
   .countdown .box span {
     font-size: 0.75rem;
@@ -484,7 +496,7 @@
   }
 
   /* ==========================================================
-     7) เขียนคำอวยพร (GUESTBOOK) & MARQUEE (FULLSCREEN SLIDE)
+     7) เขียนคำอวยพร (GUESTBOOK) & MARQUEE
   ========================================================== */
   .wish-form-card {
     background: var(--card-bg);
@@ -552,7 +564,7 @@
   }
 
   /* ==========================================================
-     8) รายละเอียดงาน & การติดต่อ
+     8) รายละเอียดงาน & การติดต่อ (ปรับให้อยู่บรรทัดเดียวกัน)
   ========================================================== */
   .info-card, .contact-card {
     background: linear-gradient(145deg, #ffffff 0%, #f4ede0 100%);
@@ -563,8 +575,20 @@
     box-shadow: 0 10px 30px rgba(114, 144, 163, 0.08);
   }
 
-  .info-card p { margin: var(--space-1) 0; color: var(--muted); }
-  .info-card strong { color: var(--cream); }
+  .info-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+    margin: var(--space-1) 0;
+    color: var(--muted);
+    white-space: nowrap;
+    font-size: 0.95rem;
+  }
+
+  .info-item strong {
+    color: var(--cream);
+  }
 
   .map-btn {
     display: inline-flex;
@@ -743,11 +767,28 @@
     fill: currentColor;
   }
 
+  /* ==========================================================
+     12) FOOTER (ล่างสุดของเว็บ + ภาษาอาหรับใช้ฟอนต์ Amiri)
+  ========================================================== */
   footer {
+    margin-top: auto;
     text-align: center;
-    padding: var(--space-3);
+    padding: 2.5rem var(--space-3) 1rem var(--space-3);
     color: var(--muted);
-    font-size: 0.85rem;
+  }
+
+  footer h2 {
+    font-family: 'Amiri', serif;
+    font-size: 1.4rem;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  footer .footer-sub {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
   }
 </style>
 </head>
@@ -805,7 +846,8 @@
 
 <!-- ========== COUNTDOWN ========== -->
 <section class="reveal">
-  <p style="color:var(--muted); letter-spacing:0.12em; font-size:1.5rem; font-weight: 600;">countdown</p>
+  <!-- โค้ด HTML ในส่วน Countdown ให้เปลี่ยน <p> เป็นดังนี้ -->
+<p style="color:var(--muted); font-family: 'Amiri', cursive; font-size: 2rem; line-height: 1.2;">Countdown</p>
   <div class="divider"></div>
   <div class="countdown" id="countdown">
     <div class="box"><strong id="cd-days">00</strong><span>วัน</span></div>
@@ -860,7 +902,7 @@
 
   <!-- Marquee แสดงคำอวยพรวิ่งแบบ 3 แถบสไลด์เต็มหน้าจอ -->
   <div style="margin-top: 2rem;">
-    <h3 style="font-size:1.2rem; color:var(--cream); font-family:var(--font-display); margin-bottom:1rem;">คำอวยพรจากเขียรติผู้มีแกก</h3>
+    <h3 style="font-size:1.2rem; color:var(--cream); font-family:var(--font-display); margin-bottom:1rem;">คำอวยพรจากเกียรติผู้มีเกียรติ</h3>
     <div class="marquee-fullscreen-group">
       <div class="marquee-wrap"><div class="marquee-track track-1"></div></div>
       <div class="marquee-wrap"><div class="marquee-track track-2"></div></div>
@@ -874,9 +916,9 @@
   <h2 style="font-size:1.8rem;">รายละเอียดงาน</h2>
   <div class="divider"></div>
   <div class="info-card">
-    <p><strong>วันที่:</strong> 30 ตุลาคม 2569 (ตรงกับวันศุกร์)</p>
-    <p><strong>เวลา:</strong> 10:00 - 18:00 น.</p>
-    <p><strong>สถานที่:</strong> บ้านปากจด, สงขลา (บ้านเจ้าบ่าว)</p>
+    <div class="info-item"><strong>วันที่:</strong> 30 ตุลาคม 2569 (ตรงกับวันศุกร์)</div>
+    <div class="info-item"><strong>เวลา:</strong> 10:00 - 18:00 น.</div>
+    <div class="info-item"><strong>สถานที่:</strong> บ้านปากจด, สงขลา (บ้านเจ้าบ่าว)</div>
     
     <!-- วงกลมสีธีมการแต่งกาย 4 สี -->
     <div style="margin-top: 1.25rem;">
@@ -923,11 +965,6 @@
   </div>
 </section>
 
-<footer>
-  <h2 style="font-size:1rem;"> بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا </h2>
-  Zainun &amp; Sadanan · 30.10.2026
-</footer>
-
 <!-- ========== BOTTOM NAVIGATION BAR ========== -->
 <nav class="bottom-nav">
   <a href="#dua-section">
@@ -947,6 +984,11 @@
     <span>ติดต่อ</span>
   </a>
 </nav>
+
+<footer>
+  <h2>بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا</h2>
+  <div class="footer-sub">Zainun &amp; Sadanan · 30.10.2026</div>
+</footer>
 
 <script>
   /* ==========================================================
@@ -993,10 +1035,8 @@
   introScreen.addEventListener('click', () => {
     if (envelope.classList.contains('opened')) return;
     
-    // สั่งเปิดซองจดหมาย
     envelope.classList.add('opened');
 
-    // เล่นเพลง
     bgm.volume = 0.1;
     bgm.playbackRate = 0.87;
     bgm.play().then(() => {
@@ -1007,7 +1047,6 @@
       console.log("Autoplay blocked:", error);
     });
 
-    // หน่วงเวลาโชว์การ์ดด้านในสั้นๆ ก่อนจางหายเข้าหน้าหลัก
     setTimeout(() => {
       introScreen.classList.add('hidden');
       document.body.classList.remove('intro-active');
