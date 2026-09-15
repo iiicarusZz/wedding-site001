@@ -536,7 +536,7 @@
     display: flex;
     height: 100%;
     width: max-content;
-    animation: scroll-right 25s linear infinite;
+    animation: scroll-left 25s linear infinite; /* เปลี่ยนชื่อตรงนี้ */
     align-items: center;
   }
 
@@ -546,9 +546,9 @@
 
   .marquee-track:hover { animation-play-state: paused; }
 
-  @keyframes scroll-right {
-    0% { transform: translateX(-50%); }
-    100% { transform: translateX(100%); }
+  @keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
   .wish {
